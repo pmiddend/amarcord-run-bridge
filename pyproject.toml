@@ -1,0 +1,122 @@
+[project]
+name = "run_bridge"
+version = "1.0"
+requires-python = ">=3.12"
+description = "Run Bridge to post runs from different sources to AMARCORD"
+authors = [
+  {name = "Philipp Middendorf", email = "philipp.middendorf@desy.de"},
+  {name = "CFEL-SC", email = "sc@cfel.de"}
+]
+license = "GPL-3.0-or-later"
+
+dependencies = [
+    "aiohttp==3.11.12",
+    "pytango==10.0.0",
+    "numpy>=2.0.0",
+    "structlog==22.3.0",
+    "structlog-overtime==1.0.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+    "ruff==0.8.6",
+]
+
+[build-system]
+requires = ["hatchling", "editables"]
+build-backend = "hatchling.build"
+
+[tool.isort]
+profile = "black"
+force_single_line = "true"
+
+[tool.ruff]
+target-version = "py310"
+
+[tool.ruff.lint.isort]
+force-single-line = true
+
+[tool.ruff.lint]
+# to turn this:
+#
+# from X import y,z
+#
+# into
+#
+# from X import y
+# from X import z
+select = ["I001", "F", "E", "W", "I", "N", "UP", "YTT", "ANN", "ASYNC", "S", "FBT", "B", "A", "C4", "T10", "ICN", "LOG", "G", "PIE", "T20", "PYI", "Q", "RET", "SLF", "SLOT", "SIM", "TID", "TC", "INT", "ARG", "PTH", "TD", "FIX", "PD", "PGH", "PL", "R", "W", "FLY", "NPY", "FAST", "AIR", "FURB", "RUF"]
+ignore = ["E501", "E722", "UP035", "ANN401", "S101", "S310", "FBT001", "B017", "B008", "B904", "C405", "C401", "C400", "G004", "G003", "PYI041", "SIM105", "TC001", "PGH003", "PGH004", "PLR2004", "PLR0913", "PLR0915", "PLR0912", "PLR0911", "RUF001", "N999", "S311", "N802", "N815", "FBT003"]
+
+[tool.pyright]
+include = ["run_bridge"]
+pythonVersion = "3.10"
+
+typeCheckingMode = "basic"
+strictListInference = true
+strictDictionaryInference = true
+strictSetInference = true
+reportInvalidStringEscapeSequence = true
+reportAssertAlwaysTrue = true
+reportInvalidTypeVarUse = false
+# deliberately false, since we cannot do anything if this happens
+reportMissingTypeStubs = false
+reportSelfClsParameterName = true
+reportUnsupportedDunderAll = true
+reportUnusedExpression = true
+reportWildcardImportFromLibrary = true
+reportConstantRedefinition = true
+reportDeprecated = true
+reportDuplicateImport = true
+reportFunctionMemberAccess = true
+reportImportCycles = true
+reportIncompatibleMethodOverride = true
+reportIncompatibleVariableOverride = true
+reportIncompleteStub = true
+reportInconsistentConstructor = true
+reportInvalidStubStatement = true
+reportMatchNotExhaustive = true
+reportMissingParameterType = true
+reportMissingTypeArgument = true
+reportOverlappingOverload = true
+reportPrivateUsage = true
+reportTypeCommentUsage = true
+reportUnknownLambdaType = true
+# not doable with pytango
+reportUnknownArgumentType = false
+# not doable with pytango
+reportUnknownParameterType = false
+# Doesn't work _at all_ for libraries
+reportUnknownMemberType = false
+# Doesn't work _at all_ for libraries
+reportUnknownVariableType = false
+reportUnnecessaryCast = true
+reportUnnecessaryComparison = true
+reportUnnecessaryContains = true
+reportUnnecessaryIsInstance = true
+reportUnusedClass = true
+reportUnusedImport = true
+reportUnusedFunction = true
+reportUnusedVariable = true
+# not doable with pytango
+reportUntypedBaseClass = false
+reportUntypedClassDecorator = true
+# this screws up quart route annotations
+reportUntypedFunctionDecorator = false
+reportUntypedNamedTuple = true
+# Doesn't work with fastapi
+reportCallInDefaultInitializer = false
+reportImplicitOverride = false
+reportImplicitStringConcatenation = true
+# In principle, a good message. However, it also forces you to call the object super method, which is pointless
+reportMissingSuperCall = false
+
+reportPropertyTypeMismatch = true
+reportShadowedImports = true
+# Works also, but doesn't play along with Tap
+reportUninitializedInstanceVariable = false
+# This works, but there's no way to ignore something in mypy, but not in pyright
+reportUnnecessaryTypeIgnoreComment = false
+# Sensible, but false positive waaaaaay to often
+reportUnusedCallResult = false

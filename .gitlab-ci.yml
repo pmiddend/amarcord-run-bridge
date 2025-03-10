@@ -1,0 +1,57 @@
+default:
+  tags:
+    - nix
+
+build:
+  stage: build
+  script:
+    - nix build -L
+
+pyright:
+  stage: test
+  script:
+    - nix develop  --command basedpyright
+
+format:
+  script:
+    # ruff has two modes:
+    # "format --check" which checks if the formatting is correct,
+    # and "ruff check" which checks if the rules are followed, which can
+    # include "semantic" changes to the code.
+    - nix develop --command ruff format --check tapedrive_runner
+    - nix develop --command ruff check tapedrive_runner
+
+check-requirements:
+  stage: test
+  script:
+    - nix develop  --command ./ci/check-requirements.sh
+
+nix-pin-latest:
+  stage: test
+  script:
+    - nix build --out-link ~/pipeline-pins/tapedrive_runner
+  only:
+    - main
+
+# This used to work fine, but the tests bind a local zmq socket and this failed at some point. So commented
+# out for now.
+# tests:
+#    script:
+#      - nix develop  --command ci/run-tests.sh
+#    coverage: '/(?i)total.*? (100(?:\.0+)?\%|[1-9]?\d(?:\.\d+)?\%)$/'
+#    artifacts:
+#      reports:
+#        coverage_report:
+#          coverage_format: cobertura
+#          path: coverage.xml
+
+# shelved for now
+# pages:
+#   script:
+#     - pushd docs
+#     - nix develop --command make html
+#     - popd
+#     - cp -R docs/build/html public/
+#   artifacts:
+#     paths:
+#     - public
