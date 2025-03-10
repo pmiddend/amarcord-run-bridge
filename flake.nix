@@ -48,7 +48,11 @@
       # This is an additional overlay implementing build fixups.
       # See:
       # - https://pyproject-nix.github.io/uv2nix/FAQ.html
-      pyprojectOverrides = final: prev: { };
+      pyprojectOverrides = final: prev: {
+        openapi-client = prev.openapi-client.overrideAttrs (old: {
+          src = ./amarcord-open/.;
+        });
+      };
 
 
       # let

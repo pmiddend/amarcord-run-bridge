@@ -12,9 +12,10 @@ license = "GPL-3.0-or-later"
 dependencies = [
     "aiohttp==3.11.12",
     "pytango==10.0.0",
-    "numpy>=2.0.0",
     "structlog==22.3.0",
     "structlog-overtime==1.0.1",
+    "pydantic>=2.10.6",
+    "openapi-client",
 ]
 
 [dependency-groups]
@@ -120,3 +121,6 @@ reportUninitializedInstanceVariable = false
 reportUnnecessaryTypeIgnoreComment = false
 # Sensible, but false positive waaaaaay to often
 reportUnusedCallResult = false
+
+[tool.uv.sources]
+openapi-client = { path = "amarcord-open" }

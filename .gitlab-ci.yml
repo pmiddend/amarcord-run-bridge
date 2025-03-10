@@ -29,7 +29,7 @@ check-requirements:
 nix-pin-latest:
   stage: test
   script:
-    - nix build --out-link ~/pipeline-pins/tapedrive_runner
+    - nix build --out-link ~/pipeline-pins/run_bridge
   only:
     - main
 
