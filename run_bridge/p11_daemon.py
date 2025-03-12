@@ -46,11 +46,7 @@ class TangoRuntimeAttribute:
     attribute_name: str
 
     async def read_value(self) -> Any:
-        return (
-            await self.device_proxy.measuring_attribute.device_proxy.read_attribute(
-                self.attribute_name
-            )
-        ).value
+        return (await self.device_proxy.read_attribute(self.attribute_name)).value
 
 
 @dataclass
@@ -83,7 +79,7 @@ class NotMeasuring:
 State: TypeAlias = Measuring | NotMeasuring
 
 
-async def initialize_runtime_config(c: Config) -> RuntimeConfig:
+async def initialize_runtime_config(c: Config) -> None | RuntimeConfig:
     attributes: list[TangoRuntimeAttribute] = []
     measuring_attribute: None | TangoRuntimeAttribute = None
     beamtime_id_attribute: None | TangoRuntimeAttribute = None
@@ -94,7 +90,7 @@ async def initialize_runtime_config(c: Config) -> RuntimeConfig:
             ra = TangoRuntimeAttribute(proxy, a.attribute_name)
             if (
                 a.attribute_name == _MEASURING_ATTRIBUTE_NAME
-                and d.device_url == c.tape_drive_runner_url
+                and d.device_url == c.p11_runner_url
             ):
                 measuring_attribute = ra
             if (
@@ -113,19 +109,19 @@ async def initialize_runtime_config(c: Config) -> RuntimeConfig:
         logger.error(
             f"cannot find the measuring attribute {_MEASURING_ATTRIBUTE_NAME} in the list of defined attributes for runner {c.tape_drive_runner_url}"
         )
-        sys.exit(1)
+        return None
 
     if beamtime_id_attribute is None:
         logger.error(
             f"cannot find the beamtime ID attribute {_BEAMTIME_ID_ATTRIBUTE_NAME} in the list of defined attributes for runner {c.tape_drive_runner_url}"
         )
-        sys.exit(1)
+        return None
 
     if run_id_attribute is None:
         logger.error(
             f"cannot find the run ID attribute {_RUN_ID_ATTRIBUTE_NAME} in the list of defined attributes for P11 runner {c.p11_runner_url}"
         )
-        sys.exit(1)
+        return None
 
     return RuntimeConfig(
         attributes, measuring_attribute, beamtime_id_attribute, run_id_attribute
@@ -164,6 +160,10 @@ async def main_loop(
                     "still measuring, but stop sent, waiting for run to finish..."
                 )
                 await asyncio.sleep(_SLEEP_DURATION_S)
+            case [Measuring(beamtime_id=beamtime_id, stop_sent=True), False]:
+                logger.info("not measuring after stop...")
+                state = NotMeasuring()
+                await asyncio.sleep(_SLEEP_DURATION_S)
             case [Measuring(beamtime_id=beamtime_id, stop_sent=False), True]:
                 # technically reduntant, but basedpyright doesn't get it (yet)
                 assert beamtime_id is not None
@@ -191,10 +191,10 @@ async def main_loop(
                 await server_instance.process_command(
                     server.CommandStopRun(beamtime_id=beamtime_id, stopped=None)
                 )
-                # we are deliberately not updating state here to avoid race conditions
-                # state = NotMeasuring()
+                await asyncio.sleep(_SLEEP_DURATION_S)
+                state = Measuring(beamtime_id=beamtime_id, stop_sent=True)
             case [NotMeasuring(), False]:
-                logger.info("still not measuring")
+                # logger.info("still not measuring")
                 await asyncio.sleep(_SLEEP_DURATION_S)
             case [NotMeasuring(), True]:
                 logger.info("starting to measure")
@@ -224,6 +224,7 @@ async def main_loop(
                     )
                     for a in rc.tango_attributes
                 ]
+                logger.info(f"sending {attributo_values}")
                 state = Measuring(beamtime_id=beamtime_id, stop_sent=False)
                 await server_instance.process_command(
                     server.CommandStartRun(
@@ -241,10 +242,31 @@ async def main_loop(
 
 
 async def async_main(c: Config) -> None:
+    config_errors = False
+    for a in c.server_config.attributi:
+        tango_name = a.input_attribute_name
+
+        found = False
+        for td in c.tango_devices:
+            for ta in td.attributes:
+                if ta.attribute_name == tango_name:
+                    found = True
+                    break
+            if found:
+                break
+        if not found:
+            logger.error(
+                f"attributo “{a.attributo_name}” refers to input attribute “{tango_name}”, but I cannot find that"
+            )
+            config_errors = True
+    if config_errors:
+        sys.exit(1)
+
     async with await server.Server.init(c.server_config) as server_instance:
         # server_instance = await server.Server.init(c.server_config)
 
-        if sys.argv[-2] == "send-schema":
+        if len(sys.argv) > 2 and sys.argv[-2] == "send-schema":
+            logger.info("sending schema...")
             try:
                 beamtime_id = int(sys.argv[-1])
             except:
@@ -255,7 +277,12 @@ async def async_main(c: Config) -> None:
             await server_instance.send_schema(beamtime_id)
             return
 
+        logger.info("initing runtime config...")
         rc = await initialize_runtime_config(c)
+
+        if rc is None:
+            logger.error("exiting...")
+            sys.exit(1)
 
         username, password = config.server_config.get_user_name_and_password()
 
@@ -266,6 +293,7 @@ async def async_main(c: Config) -> None:
         async with ApiClient(configuration) as api_client:
             auth_headers = {"Authorization": configuration.get_basic_auth_token()}
 
+            logger.info("starting main loop...")
             await main_loop(rc, server_instance, api_client, auth_headers)
 
 

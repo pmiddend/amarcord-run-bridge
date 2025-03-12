@@ -192,6 +192,9 @@ def _runtime_run_to_update_request(
                             f"attribute should have integral values as chemical IDs, but calculated {final_value}"
                         )
                         continue
+                    if final_value == 0:
+                        # for chemical IDs we reserve 0 to mean "not there"
+                        continue
                     calculated_attributi.append(
                         JsonAttributoValue(
                             attributo_id=attributo_id,
@@ -276,20 +279,6 @@ class Server:
             {"Authorization": auth_token} if auth_token else {}
         )
 
-        existing_attributo_names = set(
-            a.name
-            for a in (
-                await AttributiApi(
-                    api_client
-                ).read_attributi_api_attributi_beamtime_id_get(
-                    128,
-                    _headers=auth_headers,
-                )
-            ).attributi
-        )
-
-        logger.info(f"have the following attributi: {existing_attributo_names}")
-
         return Server(config, auth_headers, api_client)
 
     async def __aenter__(self) -> Self:
@@ -300,9 +289,8 @@ class Server:
         exc_type: type[BaseException] | None,
         exc_value: BaseException | None,
         traceback: TracebackType | None,
-    ) -> bool:
+    ) -> None:
         await self._api_client.close()
-        return True
 
     def __init__(
         self,
@@ -389,12 +377,14 @@ class Server:
         self._beamtime_id_to_current_run[c.beamtime_id] = new_run
 
         api_instance = RunsApi(self._api_client)
-        api_response = api_instance.create_or_update_run_api_runs_run_external_id_post(
-            run_external_id=c.run_id,
-            json_create_or_update_run=_runtime_run_to_update_request(
-                run_logger, c.beamtime_id, new_run, stopped=None
-            ),
-            _headers=self._auth_headers,
+        api_response = (
+            await api_instance.create_or_update_run_api_runs_run_external_id_post(
+                run_external_id=c.run_id,
+                json_create_or_update_run=_runtime_run_to_update_request(
+                    run_logger, c.beamtime_id, new_run, stopped=None
+                ),
+                _headers=self._auth_headers,
+            )
         )
 
         run_logger.info(f"response: {api_response}")
@@ -425,12 +415,14 @@ class Server:
             value_list.append(av.value)
 
         api_instance = RunsApi(self._api_client)
-        api_response = api_instance.create_or_update_run_api_runs_run_external_id_post(
-            run_external_id=run.run_id,
-            json_create_or_update_run=_runtime_run_to_update_request(
-                run_logger, c.beamtime_id, run, stopped=None
-            ),
-            _headers=self._auth_headers,
+        api_response = (
+            await api_instance.create_or_update_run_api_runs_run_external_id_post(
+                run_external_id=run.run_id,
+                json_create_or_update_run=_runtime_run_to_update_request(
+                    run_logger, c.beamtime_id, run, stopped=None
+                ),
+                _headers=self._auth_headers,
+            )
         )
 
         run_logger.info(f"run updated, response: {api_response}")
@@ -449,19 +441,21 @@ class Server:
         run_logger = bt_logger.bind(run_id=run.run_id)
 
         api_instance = RunsApi(self._api_client)
-        api_response = api_instance.create_or_update_run_api_runs_run_external_id_post(
-            run_external_id=run.run_id,
-            json_create_or_update_run=_runtime_run_to_update_request(
-                run_logger,
-                c.beamtime_id,
-                run,
-                stopped=datetime_to_attributo_int(
-                    c.stopped
-                    if c.stopped is not None
-                    else datetime.datetime.now(datetime.timezone.utc)
+        api_response = (
+            await api_instance.create_or_update_run_api_runs_run_external_id_post(
+                run_external_id=run.run_id,
+                json_create_or_update_run=_runtime_run_to_update_request(
+                    run_logger,
+                    c.beamtime_id,
+                    run,
+                    stopped=datetime_to_attributo_int(
+                        c.stopped
+                        if c.stopped is not None
+                        else datetime.datetime.now(datetime.timezone.utc)
+                    ),
                 ),
-            ),
-            _headers=self._auth_headers,
+                _headers=self._auth_headers,
+            )
         )
         run_logger.info(f"run stopped, response: {api_response}")
 
