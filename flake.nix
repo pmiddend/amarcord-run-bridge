@@ -1,7 +1,7 @@
 {
   description = "Flake for TapeDrive runner";
 
-  inputs.nixpkgs.url = "nixpkgs/nixos-24.11";
+  inputs.nixpkgs.url = "nixpkgs/nixos-unstable";
   inputs.pyproject-nix = {
     url = "github:pyproject-nix/pyproject.nix";
     inputs.nixpkgs.follows = "nixpkgs";

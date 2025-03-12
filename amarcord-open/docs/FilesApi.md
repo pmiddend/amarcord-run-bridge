@@ -85,7 +85,9 @@ No authorization required
 
 Create File Simple
 
-This endpoint was specifically crafted to upload files in a simple way from external scripts, such as the CrystFEL scripts.     It doesn't need a multipart request and the file extension can be set using the path parameter (which is used to generate nice     .mtz and .pdb download URLs).
+This endpoint was specifically crafted to upload files in a simple way from external scripts, such as the CrystFEL scripts.
+    It doesn't need a multipart request and the file extension can be set using the path parameter (which is used to generate nice
+    .mtz and .pdb download URLs).
 
 ### Example
 

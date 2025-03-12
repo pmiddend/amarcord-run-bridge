@@ -1,15 +1,31 @@
 import asyncio
-from dataclasses import dataclass
 import datetime
-from enum import Enum
 import json
+from dataclasses import dataclass
+from enum import Enum
 from pathlib import Path
 from statistics import mean
-from typing import TypeAlias
+from typing import Any, TypeAlias
+from typing_extensions import Self
 
-from pydantic import BaseModel
 import structlog
-import openapi_client
+from openapi_client.api.attributi_api import AttributiApi
+from openapi_client.api.runs_api import RunsApi
+from openapi_client.api_client import ApiClient
+from openapi_client.configuration import Configuration
+from openapi_client.models import AttributoType
+from openapi_client.models import JsonAttributoValue
+from openapi_client.models import JsonCreateAttributiFromSchemaInput
+from openapi_client.models import JsonCreateAttributiFromSchemaSingleAttributo
+from openapi_client.models import JsonCreateOrUpdateRun
+from openapi_client.models import JsonRunFile
+from openapi_client.models import JSONSchemaArray
+from openapi_client.models import JSONSchemaBoolean
+from openapi_client.models import JSONSchemaInteger
+from openapi_client.models import JSONSchemaNumber
+from openapi_client.models import JSONSchemaString
+from pydantic import BaseModel
+
 from run_bridge.logging_util import setup_structlog
 
 setup_structlog()
@@ -28,13 +44,34 @@ class AttributoDescription(BaseModel):
 
     attributo_name: str
     attributo_description: str
-    amarcord_type: openapi_client.AttributoType
+    amarcord_type: AttributoType
+
+    # When using types from the OpenAPI generator, we have to take
+    # care of them manally: they don't deserialize with the usual
+    # pydanctic "Model(**bla)" kwargs from JSON deserializatin, but
+    # rather have this "from_dict" function that we call manually
+    # here. Ugly, I know.
+    def __init__(self, **kwargs: Any) -> None:
+        kwargs["amarcord_type"] = AttributoType.from_dict(kwargs["amarcord_type"])
+        super().__init__(**kwargs)
 
 
 class Config(BaseModel):
     amarcord_url: str
     amarcord_basic_auth: str
     attributi: list[AttributoDescription]
+
+    def get_user_name_and_password(
+        self,
+    ) -> tuple[None | str, None | str]:
+        username_and_password = self.amarcord_basic_auth.split(":", maxsplit=2)
+
+        if len(username_and_password) == 2:
+            username, password = username_and_password
+        else:
+            username = None
+            password = None
+        return username, password
 
 
 RuntimeAttributoValue: TypeAlias = None | str | int | float | bool
@@ -95,8 +132,8 @@ def _runtime_run_to_update_request(
     beamtime_id: int,
     r: RuntimeRun,
     stopped: None | int,
-) -> openapi_client.JsonCreateOrUpdateRun:
-    calculated_attributi: list[openapi_client.JsonAttributoValue] = []
+) -> JsonCreateOrUpdateRun:
+    calculated_attributi: list[JsonAttributoValue] = []
     for a in r.attributi:
         alog = log.bind(input_attribute=a.input_attribute_name)
         input_attribute_values = r.attribute_names_to_values.get(a.input_attribute_name)
@@ -135,41 +172,41 @@ def _runtime_run_to_update_request(
         assert a.amarcord_type.actual_instance is not None
 
         match a.amarcord_type.actual_instance:
-            case openapi_client.JSONSchemaArray():
+            case JSONSchemaArray():
                 alog.error("array types not supported yet")
                 continue
-            case openapi_client.JSONSchemaBoolean():
+            case JSONSchemaBoolean():
                 if not isinstance(final_value, bool):
                     alog.error(
                         f"attribute should have boolean values, but calculated {final_value}"
                     )
                     continue
                 calculated_attributi.append(
-                    openapi_client.JsonAttributoValue(
+                    JsonAttributoValue(
                         attributo_id=attributo_id, attributo_value_bool=final_value
                     )
                 )
-            case openapi_client.JSONSchemaInteger(format):
-                if format == "chemical-id":
+            case JSONSchemaInteger() as schema:
+                if schema.format == "chemical-id":
                     if not isinstance(final_value, int):
                         alog.error(
                             f"attribute should have integral values as chemical IDs, but calculated {final_value}"
                         )
                         continue
                     calculated_attributi.append(
-                        openapi_client.JsonAttributoValue(
+                        JsonAttributoValue(
                             attributo_id=attributo_id,
                             attributo_value_chemical=final_value,
                         )
                     )
-                elif format == "date-time":
+                elif schema.format == "date-time":
                     if not isinstance(final_value, int | float):
                         alog.error(
                             f"attribute should have numerical values as unix time stamps, but calculated {final_value}"
                         )
                         continue
                     calculated_attributi.append(
-                        openapi_client.JsonAttributoValue(
+                        JsonAttributoValue(
                             attributo_id=attributo_id,
                             attributo_value_datetime=int(final_value),
                         )
@@ -181,48 +218,44 @@ def _runtime_run_to_update_request(
                         )
                         continue
                     calculated_attributi.append(
-                        openapi_client.JsonAttributoValue(
+                        JsonAttributoValue(
                             attributo_id=attributo_id,
                             # could be float here and we'll allow that for now
                             attributo_value_int=round(final_value),
                         )
                     )
-            case openapi_client.JSONSchemaNumber(format):
+            case JSONSchemaNumber():
                 if not isinstance(final_value, int | float):
                     alog.error(
                         f"attribute should have numerical values as chemical IDs, but calculated {final_value}"
                     )
                     continue
                 calculated_attributi.append(
-                    openapi_client.JsonAttributoValue(
+                    JsonAttributoValue(
                         attributo_id=attributo_id,
                         attributo_value_float=final_value,
                     )
                 )
-            case openapi_client.JSONSchemaString(enum):
+            case JSONSchemaString() as schema:
                 if not isinstance(final_value, str):
                     alog.error(
                         f"attribute should have string values, but calculated {final_value}"
                     )
                     continue
-                if enum is not None and final_value not in enum:
+                if schema.enum is not None and final_value not in schema.enum:
                     alog.error(
                         f"attribute not in allowed boundaries: {final_value} not one of "
-                        + ", ".join(enum)
+                        + ", ".join(schema.enum)
                     )
                     continue
                 calculated_attributi.append(
-                    openapi_client.JsonAttributoValue(
+                    JsonAttributoValue(
                         attributo_id=attributo_id, attributo_value_str=final_value
                     )
                 )
-    return openapi_client.JsonCreateOrUpdateRun(
+    return JsonCreateOrUpdateRun(
         beamtime_id=beamtime_id,
-        run_id=r.run_id,
-        files=[
-            openapi_client.JsonRunFile(id=0, glob=f.glob, source=f.source)
-            for f in r.files
-        ],
+        files=[JsonRunFile(id=0, glob=f.glob, source=f.source) for f in r.files],
         attributi=calculated_attributi,
         started=r.started,
         stopped=stopped,
@@ -232,25 +265,19 @@ def _runtime_run_to_update_request(
 class Server:
     @staticmethod
     async def init(config: Config) -> "Server":
-        username_and_password = config.amarcord_basic_auth.split(":", maxsplit=2)
-
-        if len(username_and_password) == 2:
-            username, password = username_and_password
-        else:
-            username = None
-            password = None
+        username, password = config.get_user_name_and_password()
 
         logger.info(f"auth: {username=}, {password=}")
-        configuration = openapi_client.Configuration(
+        configuration = Configuration(
             host=config.amarcord_url, username=username, password=password
         )
-        api_client = openapi_client.ApiClient(configuration)
+        api_client = ApiClient(configuration)
         auth_headers = {"Authorization": configuration.get_basic_auth_token()}
 
         existing_attributo_names = set(
             a.name
             for a in (
-                await openapi_client.AttributiApi(
+                await AttributiApi(
                     api_client
                 ).read_attributi_api_attributi_beamtime_id_get(
                     128,
@@ -263,11 +290,17 @@ class Server:
 
         return Server(config, auth_headers, api_client)
 
+    async def __aenter__(self) -> Self:
+        return self
+
+    async def __aexit__(self, exc_type, exc_value, traceback) -> None:
+        await self._api_client.close()
+
     def __init__(
         self,
         config: Config,
         auth_headers: dict[str, str],
-        api_client: openapi_client.ApiClient,
+        api_client: ApiClient,
     ) -> None:
         self._config = config
         self._api_client = api_client
@@ -275,7 +308,7 @@ class Server:
         self._beamtime_id_to_current_run: dict[int, RuntimeRun] = {}
 
     async def send_schema(self, beamtime_id: int) -> None:
-        api_instance = openapi_client.AttributiApi(self._api_client)
+        api_instance = AttributiApi(self._api_client)
 
         existing_attributo_names = set(
             a.name
@@ -286,21 +319,32 @@ class Server:
             ).attributi
         )
 
-        new_attributi = [
-            openapi_client.JsonCreateAttributiFromSchemaSingleAttributo(
+        for ad in self._config.attributi:
+            ad_json = JsonCreateAttributiFromSchemaSingleAttributo(
                 attributo_name=ad.attributo_name,
-                attributo_description=ad.attributo_description,
+                description=ad.attributo_description,
+                attributo_type=ad.amarcord_type,
+            )
+            assert ad.amarcord_type.to_json() != "null"
+            logger.info(f"json: {ad.amarcord_type.to_json()}")
+        new_attributi = [
+            JsonCreateAttributiFromSchemaSingleAttributo(
+                attributo_name=ad.attributo_name,
+                description=ad.attributo_description,
                 attributo_type=ad.amarcord_type,
             )
             for ad in self._config.attributi
             if ad.attributo_name not in existing_attributo_names
         ]
 
+        logger.info(f"sending {new_attributi[0].to_json()}")
+
         if not new_attributi:
             logger.info("no new attributi detected, not doing anything")
         else:
+            logger.info(f"sending the following attributi: {new_attributi}")
             create_response = await api_instance.create_attributi_from_schema_api_attributi_schema_post(
-                openapi_client.JsonCreateAttributiFromSchemaInput(
+                JsonCreateAttributiFromSchemaInput(
                     attributi_schema=new_attributi,
                     beamtime_id=beamtime_id,
                 ),
@@ -319,10 +363,10 @@ class Server:
             )
             # FIXME: close prior run
 
-        api_instance = openapi_client.AttributiApi(self._api_client)
+        api_instance = AttributiApi(self._api_client)
 
         attributo_name_to_id: dict[str, int] = {
-            a.name: a.attributo_id
+            a.name: a.id
             for a in (
                 await api_instance.read_attributi_api_attributi_beamtime_id_get(
                     c.beamtime_id,
@@ -347,9 +391,9 @@ class Server:
         )
         self._beamtime_id_to_current_run[c.beamtime_id] = new_run
 
-        api_instance = openapi_client.RunsApi(self._api_client)
+        api_instance = RunsApi(self._api_client)
         api_response = api_instance.create_or_update_run_api_runs_run_external_id_post(
-            runs_external_id=c.run_id,
+            run_external_id=c.run_id,
             json_create_or_update_run=_runtime_run_to_update_request(
                 run_logger, c.beamtime_id, new_run, stopped=None
             ),
@@ -372,7 +416,7 @@ class Server:
         run_logger = bt_logger.bind(run_id=run.run_id)
 
         for av in c.attributo_values:
-            alog = run_logger.bind(input_attribute=a.input_attribute_name)
+            alog = run_logger.bind(input_attribute=av.attribute_name)
             value_list = run.attribute_names_to_values.get(av.attribute_name)
 
             if value_list is None:
@@ -383,9 +427,9 @@ class Server:
 
             value_list.append(av.value)
 
-        api_instance = openapi_client.RunsApi(self._api_client)
+        api_instance = RunsApi(self._api_client)
         api_response = api_instance.create_or_update_run_api_runs_run_external_id_post(
-            runs_external_id=run.run_id,
+            run_external_id=run.run_id,
             json_create_or_update_run=_runtime_run_to_update_request(
                 run_logger, c.beamtime_id, run, stopped=None
             ),
@@ -407,9 +451,9 @@ class Server:
 
         run_logger = bt_logger.bind(run_id=run.run_id)
 
-        api_instance = openapi_client.RunsApi(self._api_client)
+        api_instance = RunsApi(self._api_client)
         api_response = api_instance.create_or_update_run_api_runs_run_external_id_post(
-            runs_external_id=run.run_id,
+            run_external_id=run.run_id,
             json_create_or_update_run=_runtime_run_to_update_request(
                 run_logger,
                 c.beamtime_id,
@@ -436,7 +480,20 @@ class Server:
                 await self._process_stop_run(command)
 
 
-with Path("config.json").open("r") as f:
-    config = Config(**json.load(f))
+# with Path("config.json").open("r") as f:
+#     config = Config(**json.load(f))
 
-    asyncio.run(Server.init(config))
+#     asyncio.run(Server.init(config))
+
+# ft = AttributoType.from_dict({"type": "integer", "format": "chemical-id"})
+# ft = AttributoType(**{"type": "integer", "format": "chemical-id"})
+# ad = AttributoDescription(
+#     **{
+#         "input_attribute_name": "channel_1_chemical",
+#         "operation": "take-first",
+#         "attributo_name": "channel_1_chemical_id",
+#         "attributo_description": "First channel chemical",
+#         "amarcord_type": {"type": "integer", "format": "chemical-id"},
+#     }
+# )
+# logger.info(f"ft: {ad}")
