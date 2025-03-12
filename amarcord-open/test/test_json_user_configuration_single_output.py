@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_user_configuration_single_output import JsonUserConfigurationSingleOutput
+from amarcord_open.models.json_user_configuration_single_output import JsonUserConfigurationSingleOutput
 
 class TestJsonUserConfigurationSingleOutput(unittest.TestCase):
     """JsonUserConfigurationSingleOutput unit test stubs"""

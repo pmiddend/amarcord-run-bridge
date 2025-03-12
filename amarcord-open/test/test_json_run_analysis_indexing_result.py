@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_run_analysis_indexing_result import JsonRunAnalysisIndexingResult
+from amarcord_open.models.json_run_analysis_indexing_result import JsonRunAnalysisIndexingResult
 
 class TestJsonRunAnalysisIndexingResult(unittest.TestCase):
     """JsonRunAnalysisIndexingResult unit test stubs"""
@@ -36,14 +36,14 @@ class TestJsonRunAnalysisIndexingResult(unittest.TestCase):
         if include_optional:
             return JsonRunAnalysisIndexingResult(
                 run_id = 56,
-                foms = openapi_client.models.json_indexing_fom.JsonIndexingFom(
+                foms = amarcord_open.models.json_indexing_fom.JsonIndexingFom(
                     hit_rate = 1.337, 
                     indexing_rate = 1.337, 
                     indexed_frames = 56, 
                     detector_shift_x_mm = 1.337, 
                     detector_shift_y_mm = 1.337, ),
                 indexing_statistics = [
-                    openapi_client.models.json_indexing_statistic.JsonIndexingStatistic(
+                    amarcord_open.models.json_indexing_statistic.JsonIndexingStatistic(
                         time = 56, 
                         frames = 56, 
                         hits = 56, 
@@ -57,14 +57,14 @@ class TestJsonRunAnalysisIndexingResult(unittest.TestCase):
         else:
             return JsonRunAnalysisIndexingResult(
                 run_id = 56,
-                foms = openapi_client.models.json_indexing_fom.JsonIndexingFom(
+                foms = amarcord_open.models.json_indexing_fom.JsonIndexingFom(
                     hit_rate = 1.337, 
                     indexing_rate = 1.337, 
                     indexed_frames = 56, 
                     detector_shift_x_mm = 1.337, 
                     detector_shift_y_mm = 1.337, ),
                 indexing_statistics = [
-                    openapi_client.models.json_indexing_statistic.JsonIndexingStatistic(
+                    amarcord_open.models.json_indexing_statistic.JsonIndexingStatistic(
                         time = 56, 
                         frames = 56, 
                         hits = 56, 

@@ -15,7 +15,7 @@ dependencies = [
     "structlog==22.3.0",
     "structlog-overtime==1.0.1",
     "pydantic>=2.10.6",
-    "openapi-client",
+    "amarcord-open",
 ]
 
 [dependency-groups]
@@ -124,4 +124,4 @@ reportUnnecessaryTypeIgnoreComment = false
 reportUnusedCallResult = false
 
 [tool.uv.sources]
-openapi-client = { path = "amarcord-open" }
+amarcord-open = { path = "amarcord-open" }

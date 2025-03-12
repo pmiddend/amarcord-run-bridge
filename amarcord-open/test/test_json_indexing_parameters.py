@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_indexing_parameters import JsonIndexingParameters
+from amarcord_open.models.json_indexing_parameters import JsonIndexingParameters
 
 class TestJsonIndexingParameters(unittest.TestCase):
     """JsonIndexingParameters unit test stubs"""

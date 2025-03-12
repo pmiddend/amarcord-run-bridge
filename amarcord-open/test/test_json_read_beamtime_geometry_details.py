@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_read_beamtime_geometry_details import JsonReadBeamtimeGeometryDetails
+from amarcord_open.models.json_read_beamtime_geometry_details import JsonReadBeamtimeGeometryDetails
 
 class TestJsonReadBeamtimeGeometryDetails(unittest.TestCase):
     """JsonReadBeamtimeGeometryDetails unit test stubs"""
@@ -36,7 +36,7 @@ class TestJsonReadBeamtimeGeometryDetails(unittest.TestCase):
         if include_optional:
             return JsonReadBeamtimeGeometryDetails(
                 detector_shifts = [
-                    openapi_client.models.json_detector_shift.JsonDetectorShift(
+                    amarcord_open.models.json_detector_shift.JsonDetectorShift(
                         run_external_id = 56, 
                         run_start = 56, 
                         run_end = 56, 
@@ -48,7 +48,7 @@ class TestJsonReadBeamtimeGeometryDetails(unittest.TestCase):
         else:
             return JsonReadBeamtimeGeometryDetails(
                 detector_shifts = [
-                    openapi_client.models.json_detector_shift.JsonDetectorShift(
+                    amarcord_open.models.json_detector_shift.JsonDetectorShift(
                         run_external_id = 56, 
                         run_start = 56, 
                         run_end = 56, 

@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_check_standard_unit_output import JsonCheckStandardUnitOutput
+from amarcord_open.models.json_check_standard_unit_output import JsonCheckStandardUnitOutput
 
 class TestJsonCheckStandardUnitOutput(unittest.TestCase):
     """JsonCheckStandardUnitOutput unit test stubs"""

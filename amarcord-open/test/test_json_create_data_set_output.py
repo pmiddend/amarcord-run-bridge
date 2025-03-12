@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_create_data_set_output import JsonCreateDataSetOutput
+from amarcord_open.models.json_create_data_set_output import JsonCreateDataSetOutput
 
 class TestJsonCreateDataSetOutput(unittest.TestCase):
     """JsonCreateDataSetOutput unit test stubs"""

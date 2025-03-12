@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_chemical import JsonChemical
+from amarcord_open.models.json_chemical import JsonChemical
 
 class TestJsonChemical(unittest.TestCase):
     """JsonChemical unit test stubs"""
@@ -41,7 +41,7 @@ class TestJsonChemical(unittest.TestCase):
                 responsible_person = '',
                 chemical_type = 'crystal',
                 attributi = [
-                    openapi_client.models.json_attributo_value.JsonAttributoValue(
+                    amarcord_open.models.json_attributo_value.JsonAttributoValue(
                         attributo_id = 56, 
                         attributo_value_str = '', 
                         attributo_value_int = 56, 
@@ -60,7 +60,7 @@ class TestJsonChemical(unittest.TestCase):
                             ], )
                     ],
                 files = [
-                    openapi_client.models.json_file_output.JsonFileOutput(
+                    amarcord_open.models.json_file_output.JsonFileOutput(
                         id = 56, 
                         description = '', 
                         type_ = '', 
@@ -77,7 +77,7 @@ class TestJsonChemical(unittest.TestCase):
                 responsible_person = '',
                 chemical_type = 'crystal',
                 attributi = [
-                    openapi_client.models.json_attributo_value.JsonAttributoValue(
+                    amarcord_open.models.json_attributo_value.JsonAttributoValue(
                         attributo_id = 56, 
                         attributo_value_str = '', 
                         attributo_value_int = 56, 
@@ -96,7 +96,7 @@ class TestJsonChemical(unittest.TestCase):
                             ], )
                     ],
                 files = [
-                    openapi_client.models.json_file_output.JsonFileOutput(
+                    amarcord_open.models.json_file_output.JsonFileOutput(
                         id = 56, 
                         description = '', 
                         type_ = '', 

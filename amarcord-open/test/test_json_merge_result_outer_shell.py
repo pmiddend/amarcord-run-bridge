@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_merge_result_outer_shell import JsonMergeResultOuterShell
+from amarcord_open.models.json_merge_result_outer_shell import JsonMergeResultOuterShell
 
 class TestJsonMergeResultOuterShell(unittest.TestCase):
     """JsonMergeResultOuterShell unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.scale_intensities import ScaleIntensities
+from amarcord_open.models.scale_intensities import ScaleIntensities
 
 class TestScaleIntensities(unittest.TestCase):
     """ScaleIntensities unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_beamtime_schedule_row import JsonBeamtimeScheduleRow
+from amarcord_open.models.json_beamtime_schedule_row import JsonBeamtimeScheduleRow
 
 class TestJsonBeamtimeScheduleRow(unittest.TestCase):
     """JsonBeamtimeScheduleRow unit test stubs"""

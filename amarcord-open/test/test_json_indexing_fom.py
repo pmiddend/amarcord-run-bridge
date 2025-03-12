@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_indexing_fom import JsonIndexingFom
+from amarcord_open.models.json_indexing_fom import JsonIndexingFom
 
 class TestJsonIndexingFom(unittest.TestCase):
     """JsonIndexingFom unit test stubs"""

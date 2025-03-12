@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_indexing_result import JsonIndexingResult
+from amarcord_open.models.json_indexing_result import JsonIndexingResult
 
 class TestJsonIndexingResult(unittest.TestCase):
     """JsonIndexingResult unit test stubs"""
@@ -39,7 +39,7 @@ class TestJsonIndexingResult(unittest.TestCase):
                 created = 56,
                 started = 56,
                 stopped = 56,
-                parameters = openapi_client.models.json_indexing_parameters.JsonIndexingParameters(
+                parameters = amarcord_open.models.json_indexing_parameters.JsonIndexingParameters(
                     id = 56, 
                     cell_description = '', 
                     is_online = True, 
@@ -65,7 +65,7 @@ class TestJsonIndexingResult(unittest.TestCase):
             return JsonIndexingResult(
                 id = 56,
                 created = 56,
-                parameters = openapi_client.models.json_indexing_parameters.JsonIndexingParameters(
+                parameters = amarcord_open.models.json_indexing_parameters.JsonIndexingParameters(
                     id = 56, 
                     cell_description = '', 
                     is_online = True, 

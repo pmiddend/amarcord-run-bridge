@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_read_new_analysis_output import JsonReadNewAnalysisOutput
+from amarcord_open.models.json_read_new_analysis_output import JsonReadNewAnalysisOutput
 
 class TestJsonReadNewAnalysisOutput(unittest.TestCase):
     """JsonReadNewAnalysisOutput unit test stubs"""
@@ -36,16 +36,16 @@ class TestJsonReadNewAnalysisOutput(unittest.TestCase):
         if include_optional:
             return JsonReadNewAnalysisOutput(
                 searchable_attributi = [
-                    openapi_client.models.json_attributo.JsonAttributo(
+                    amarcord_open.models.json_attributo.JsonAttributo(
                         id = 56, 
                         name = '', 
                         description = '', 
                         group = '', 
                         associated_table = 'run', 
-                        attributo_type_integer = openapi_client.models.json_schema_integer.JSONSchemaInteger(
+                        attributo_type_integer = amarcord_open.models.json_schema_integer.JSONSchemaInteger(
                             type = 'integer', 
                             format = 'date-time', ), 
-                        attributo_type_number = openapi_client.models.json_schema_number.JSONSchemaNumber(
+                        attributo_type_number = amarcord_open.models.json_schema_number.JSONSchemaNumber(
                             type = 'number', 
                             minimum = 1.337, 
                             maximum = 1.337, 
@@ -55,30 +55,30 @@ class TestJsonReadNewAnalysisOutput(unittest.TestCase):
                             format = 'standard-unit', 
                             tolerance = 1.337, 
                             tolerance_is_absolute = True, ), 
-                        attributo_type_string = openapi_client.models.json_schema_string.JSONSchemaString(
+                        attributo_type_string = amarcord_open.models.json_schema_string.JSONSchemaString(
                             type = 'string', 
                             enum = [
                                 ''
                                 ], ), 
-                        attributo_type_array = openapi_client.models.json_schema_array.JSONSchemaArray(
+                        attributo_type_array = amarcord_open.models.json_schema_array.JSONSchemaArray(
                             type = 'array', 
                             item_type = 'string', 
                             min_items = 56, 
                             max_items = 56, ), 
-                        attributo_type_boolean = openapi_client.models.json_schema_boolean.JSONSchemaBoolean(
+                        attributo_type_boolean = amarcord_open.models.json_schema_boolean.JSONSchemaBoolean(
                             type = 'boolean', ), )
                     ],
                 attributi = [
-                    openapi_client.models.json_attributo.JsonAttributo(
+                    amarcord_open.models.json_attributo.JsonAttributo(
                         id = 56, 
                         name = '', 
                         description = '', 
                         group = '', 
                         associated_table = 'run', 
-                        attributo_type_integer = openapi_client.models.json_schema_integer.JSONSchemaInteger(
+                        attributo_type_integer = amarcord_open.models.json_schema_integer.JSONSchemaInteger(
                             type = 'integer', 
                             format = 'date-time', ), 
-                        attributo_type_number = openapi_client.models.json_schema_number.JSONSchemaNumber(
+                        attributo_type_number = amarcord_open.models.json_schema_number.JSONSchemaNumber(
                             type = 'number', 
                             minimum = 1.337, 
                             maximum = 1.337, 
@@ -88,35 +88,35 @@ class TestJsonReadNewAnalysisOutput(unittest.TestCase):
                             format = 'standard-unit', 
                             tolerance = 1.337, 
                             tolerance_is_absolute = True, ), 
-                        attributo_type_string = openapi_client.models.json_schema_string.JSONSchemaString(
+                        attributo_type_string = amarcord_open.models.json_schema_string.JSONSchemaString(
                             type = 'string', 
                             enum = [
                                 ''
                                 ], ), 
-                        attributo_type_array = openapi_client.models.json_schema_array.JSONSchemaArray(
+                        attributo_type_array = amarcord_open.models.json_schema_array.JSONSchemaArray(
                             type = 'array', 
                             item_type = 'string', 
                             min_items = 56, 
                             max_items = 56, ), 
-                        attributo_type_boolean = openapi_client.models.json_schema_boolean.JSONSchemaBoolean(
+                        attributo_type_boolean = amarcord_open.models.json_schema_boolean.JSONSchemaBoolean(
                             type = 'boolean', ), )
                     ],
                 chemical_id_to_name = [
-                    openapi_client.models.json_chemical_id_and_name.JsonChemicalIdAndName(
+                    amarcord_open.models.json_chemical_id_and_name.JsonChemicalIdAndName(
                         chemical_id = 56, 
                         name = '', )
                     ],
                 experiment_types = [
-                    openapi_client.models.json_experiment_type_with_beamtime_information.JsonExperimentTypeWithBeamtimeInformation(
-                        experiment_type = openapi_client.models.json_experiment_type.JsonExperimentType(
+                    amarcord_open.models.json_experiment_type_with_beamtime_information.JsonExperimentTypeWithBeamtimeInformation(
+                        experiment_type = amarcord_open.models.json_experiment_type.JsonExperimentType(
                             id = 56, 
                             name = '', 
                             attributi = [
-                                openapi_client.models.json_attributi_id_and_role.JsonAttributiIdAndRole(
+                                amarcord_open.models.json_attributi_id_and_role.JsonAttributiIdAndRole(
                                     id = 56, 
                                     role = 'crystal', )
                                 ], ), 
-                        beamtime = openapi_client.models.json_beamtime.JsonBeamtime(
+                        beamtime = amarcord_open.models.json_beamtime.JsonBeamtime(
                             id = 56, 
                             external_id = '', 
                             proposal = '', 
@@ -131,12 +131,12 @@ class TestJsonReadNewAnalysisOutput(unittest.TestCase):
                             analysis_output_path = '', ), )
                     ],
                 filtered_data_sets = [
-                    openapi_client.models.json_data_set.JsonDataSet(
+                    amarcord_open.models.json_data_set.JsonDataSet(
                         id = 56, 
                         experiment_type_id = 56, 
                         beamtime_id = 56, 
                         attributi = [
-                            openapi_client.models.json_attributo_value.JsonAttributoValue(
+                            amarcord_open.models.json_attributo_value.JsonAttributoValue(
                                 attributo_id = 56, 
                                 attributo_value_str = '', 
                                 attributo_value_int = 56, 
@@ -156,7 +156,7 @@ class TestJsonReadNewAnalysisOutput(unittest.TestCase):
                             ], )
                     ],
                 data_set_statistics = [
-                    openapi_client.models.json_data_set_statistics.JsonDataSetStatistics(
+                    amarcord_open.models.json_data_set_statistics.JsonDataSetStatistics(
                         data_set_id = 56, 
                         run_count = 56, 
                         merge_results_count = 56, 
@@ -164,7 +164,7 @@ class TestJsonReadNewAnalysisOutput(unittest.TestCase):
                         merge_or_indexing_jobs_running = True, )
                     ],
                 attributi_values = [
-                    openapi_client.models.json_attributo_value.JsonAttributoValue(
+                    amarcord_open.models.json_attributo_value.JsonAttributoValue(
                         attributo_id = 56, 
                         attributo_value_str = '', 
                         attributo_value_int = 56, 
@@ -186,16 +186,16 @@ class TestJsonReadNewAnalysisOutput(unittest.TestCase):
         else:
             return JsonReadNewAnalysisOutput(
                 searchable_attributi = [
-                    openapi_client.models.json_attributo.JsonAttributo(
+                    amarcord_open.models.json_attributo.JsonAttributo(
                         id = 56, 
                         name = '', 
                         description = '', 
                         group = '', 
                         associated_table = 'run', 
-                        attributo_type_integer = openapi_client.models.json_schema_integer.JSONSchemaInteger(
+                        attributo_type_integer = amarcord_open.models.json_schema_integer.JSONSchemaInteger(
                             type = 'integer', 
                             format = 'date-time', ), 
-                        attributo_type_number = openapi_client.models.json_schema_number.JSONSchemaNumber(
+                        attributo_type_number = amarcord_open.models.json_schema_number.JSONSchemaNumber(
                             type = 'number', 
                             minimum = 1.337, 
                             maximum = 1.337, 
@@ -205,30 +205,30 @@ class TestJsonReadNewAnalysisOutput(unittest.TestCase):
                             format = 'standard-unit', 
                             tolerance = 1.337, 
                             tolerance_is_absolute = True, ), 
-                        attributo_type_string = openapi_client.models.json_schema_string.JSONSchemaString(
+                        attributo_type_string = amarcord_open.models.json_schema_string.JSONSchemaString(
                             type = 'string', 
                             enum = [
                                 ''
                                 ], ), 
-                        attributo_type_array = openapi_client.models.json_schema_array.JSONSchemaArray(
+                        attributo_type_array = amarcord_open.models.json_schema_array.JSONSchemaArray(
                             type = 'array', 
                             item_type = 'string', 
                             min_items = 56, 
                             max_items = 56, ), 
-                        attributo_type_boolean = openapi_client.models.json_schema_boolean.JSONSchemaBoolean(
+                        attributo_type_boolean = amarcord_open.models.json_schema_boolean.JSONSchemaBoolean(
                             type = 'boolean', ), )
                     ],
                 attributi = [
-                    openapi_client.models.json_attributo.JsonAttributo(
+                    amarcord_open.models.json_attributo.JsonAttributo(
                         id = 56, 
                         name = '', 
                         description = '', 
                         group = '', 
                         associated_table = 'run', 
-                        attributo_type_integer = openapi_client.models.json_schema_integer.JSONSchemaInteger(
+                        attributo_type_integer = amarcord_open.models.json_schema_integer.JSONSchemaInteger(
                             type = 'integer', 
                             format = 'date-time', ), 
-                        attributo_type_number = openapi_client.models.json_schema_number.JSONSchemaNumber(
+                        attributo_type_number = amarcord_open.models.json_schema_number.JSONSchemaNumber(
                             type = 'number', 
                             minimum = 1.337, 
                             maximum = 1.337, 
@@ -238,35 +238,35 @@ class TestJsonReadNewAnalysisOutput(unittest.TestCase):
                             format = 'standard-unit', 
                             tolerance = 1.337, 
                             tolerance_is_absolute = True, ), 
-                        attributo_type_string = openapi_client.models.json_schema_string.JSONSchemaString(
+                        attributo_type_string = amarcord_open.models.json_schema_string.JSONSchemaString(
                             type = 'string', 
                             enum = [
                                 ''
                                 ], ), 
-                        attributo_type_array = openapi_client.models.json_schema_array.JSONSchemaArray(
+                        attributo_type_array = amarcord_open.models.json_schema_array.JSONSchemaArray(
                             type = 'array', 
                             item_type = 'string', 
                             min_items = 56, 
                             max_items = 56, ), 
-                        attributo_type_boolean = openapi_client.models.json_schema_boolean.JSONSchemaBoolean(
+                        attributo_type_boolean = amarcord_open.models.json_schema_boolean.JSONSchemaBoolean(
                             type = 'boolean', ), )
                     ],
                 chemical_id_to_name = [
-                    openapi_client.models.json_chemical_id_and_name.JsonChemicalIdAndName(
+                    amarcord_open.models.json_chemical_id_and_name.JsonChemicalIdAndName(
                         chemical_id = 56, 
                         name = '', )
                     ],
                 experiment_types = [
-                    openapi_client.models.json_experiment_type_with_beamtime_information.JsonExperimentTypeWithBeamtimeInformation(
-                        experiment_type = openapi_client.models.json_experiment_type.JsonExperimentType(
+                    amarcord_open.models.json_experiment_type_with_beamtime_information.JsonExperimentTypeWithBeamtimeInformation(
+                        experiment_type = amarcord_open.models.json_experiment_type.JsonExperimentType(
                             id = 56, 
                             name = '', 
                             attributi = [
-                                openapi_client.models.json_attributi_id_and_role.JsonAttributiIdAndRole(
+                                amarcord_open.models.json_attributi_id_and_role.JsonAttributiIdAndRole(
                                     id = 56, 
                                     role = 'crystal', )
                                 ], ), 
-                        beamtime = openapi_client.models.json_beamtime.JsonBeamtime(
+                        beamtime = amarcord_open.models.json_beamtime.JsonBeamtime(
                             id = 56, 
                             external_id = '', 
                             proposal = '', 
@@ -281,12 +281,12 @@ class TestJsonReadNewAnalysisOutput(unittest.TestCase):
                             analysis_output_path = '', ), )
                     ],
                 filtered_data_sets = [
-                    openapi_client.models.json_data_set.JsonDataSet(
+                    amarcord_open.models.json_data_set.JsonDataSet(
                         id = 56, 
                         experiment_type_id = 56, 
                         beamtime_id = 56, 
                         attributi = [
-                            openapi_client.models.json_attributo_value.JsonAttributoValue(
+                            amarcord_open.models.json_attributo_value.JsonAttributoValue(
                                 attributo_id = 56, 
                                 attributo_value_str = '', 
                                 attributo_value_int = 56, 
@@ -306,7 +306,7 @@ class TestJsonReadNewAnalysisOutput(unittest.TestCase):
                             ], )
                     ],
                 data_set_statistics = [
-                    openapi_client.models.json_data_set_statistics.JsonDataSetStatistics(
+                    amarcord_open.models.json_data_set_statistics.JsonDataSetStatistics(
                         data_set_id = 56, 
                         run_count = 56, 
                         merge_results_count = 56, 
@@ -314,7 +314,7 @@ class TestJsonReadNewAnalysisOutput(unittest.TestCase):
                         merge_or_indexing_jobs_running = True, )
                     ],
                 attributi_values = [
-                    openapi_client.models.json_attributo_value.JsonAttributoValue(
+                    amarcord_open.models.json_attributo_value.JsonAttributoValue(
                         attributo_id = 56, 
                         attributo_value_str = '', 
                         attributo_value_int = 56, 

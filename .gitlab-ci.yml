@@ -18,8 +18,8 @@ format:
     # "format --check" which checks if the formatting is correct,
     # and "ruff check" which checks if the rules are followed, which can
     # include "semantic" changes to the code.
-    - nix develop --command ruff format --check tapedrive_runner
-    - nix develop --command ruff check tapedrive_runner
+    - nix develop --command ruff format --check run_bridge
+    - nix develop --command ruff check run_bridge
 
 check-requirements:
   stage: test

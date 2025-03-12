@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_run import JsonRun
+from amarcord_open.models.json_run import JsonRun
 
 class TestJsonRun(unittest.TestCase):
     """JsonRun unit test stubs"""
@@ -38,7 +38,7 @@ class TestJsonRun(unittest.TestCase):
                 id = 56,
                 external_id = 56,
                 attributi = [
-                    openapi_client.models.json_attributo_value.JsonAttributoValue(
+                    amarcord_open.models.json_attributo_value.JsonAttributoValue(
                         attributo_id = 56, 
                         attributo_value_str = '', 
                         attributo_value_int = 56, 
@@ -59,12 +59,12 @@ class TestJsonRun(unittest.TestCase):
                 started = 56,
                 stopped = 56,
                 files = [
-                    openapi_client.models.json_run_file.JsonRunFile(
+                    amarcord_open.models.json_run_file.JsonRunFile(
                         id = 56, 
                         glob = '', 
                         source = '', )
                     ],
-                summary = openapi_client.models.json_indexing_fom.JsonIndexingFom(
+                summary = amarcord_open.models.json_indexing_fom.JsonIndexingFom(
                     hit_rate = 1.337, 
                     indexing_rate = 1.337, 
                     indexed_frames = 56, 
@@ -77,7 +77,7 @@ class TestJsonRun(unittest.TestCase):
                 id = 56,
                 external_id = 56,
                 attributi = [
-                    openapi_client.models.json_attributo_value.JsonAttributoValue(
+                    amarcord_open.models.json_attributo_value.JsonAttributoValue(
                         attributo_id = 56, 
                         attributo_value_str = '', 
                         attributo_value_int = 56, 
@@ -97,12 +97,12 @@ class TestJsonRun(unittest.TestCase):
                     ],
                 started = 56,
                 files = [
-                    openapi_client.models.json_run_file.JsonRunFile(
+                    amarcord_open.models.json_run_file.JsonRunFile(
                         id = 56, 
                         glob = '', 
                         source = '', )
                     ],
-                summary = openapi_client.models.json_indexing_fom.JsonIndexingFom(
+                summary = amarcord_open.models.json_indexing_fom.JsonIndexingFom(
                     hit_rate = 1.337, 
                     indexing_rate = 1.337, 
                     indexed_frames = 56, 

@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_read_runs_bulk_input import JsonReadRunsBulkInput
+from amarcord_open.models.json_read_runs_bulk_input import JsonReadRunsBulkInput
 
 class TestJsonReadRunsBulkInput(unittest.TestCase):
     """JsonReadRunsBulkInput unit test stubs"""

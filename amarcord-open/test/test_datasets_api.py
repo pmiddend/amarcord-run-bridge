@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.api.datasets_api import DatasetsApi
+from amarcord_open.api.datasets_api import DatasetsApi
 
 
 class TestDatasetsApi(unittest.IsolatedAsyncioTestCase):
@@ -24,7 +24,7 @@ class TestDatasetsApi(unittest.IsolatedAsyncioTestCase):
         self.api = DatasetsApi()
 
     async def asyncTearDown(self) -> None:
-        pass
+        await self.api.api_client.close()
 
     async def test_create_data_set_api_data_sets_post(self) -> None:
         """Test case for create_data_set_api_data_sets_post

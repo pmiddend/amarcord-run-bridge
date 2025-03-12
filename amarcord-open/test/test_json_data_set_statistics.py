@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_data_set_statistics import JsonDataSetStatistics
+from amarcord_open.models.json_data_set_statistics import JsonDataSetStatistics
 
 class TestJsonDataSetStatistics(unittest.TestCase):
     """JsonDataSetStatistics unit test stubs"""

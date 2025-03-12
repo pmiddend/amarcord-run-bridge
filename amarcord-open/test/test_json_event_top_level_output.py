@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_event_top_level_output import JsonEventTopLevelOutput
+from amarcord_open.models.json_event_top_level_output import JsonEventTopLevelOutput
 
 class TestJsonEventTopLevelOutput(unittest.TestCase):
     """JsonEventTopLevelOutput unit test stubs"""

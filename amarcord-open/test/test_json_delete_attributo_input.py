@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_delete_attributo_input import JsonDeleteAttributoInput
+from amarcord_open.models.json_delete_attributo_input import JsonDeleteAttributoInput
 
 class TestJsonDeleteAttributoInput(unittest.TestCase):
     """JsonDeleteAttributoInput unit test stubs"""

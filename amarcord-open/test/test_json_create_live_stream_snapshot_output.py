@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_create_live_stream_snapshot_output import JsonCreateLiveStreamSnapshotOutput
+from amarcord_open.models.json_create_live_stream_snapshot_output import JsonCreateLiveStreamSnapshotOutput
 
 class TestJsonCreateLiveStreamSnapshotOutput(unittest.TestCase):
     """JsonCreateLiveStreamSnapshotOutput unit test stubs"""

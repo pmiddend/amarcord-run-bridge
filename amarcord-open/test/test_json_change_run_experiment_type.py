@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_change_run_experiment_type import JsonChangeRunExperimentType
+from amarcord_open.models.json_change_run_experiment_type import JsonChangeRunExperimentType
 
 class TestJsonChangeRunExperimentType(unittest.TestCase):
     """JsonChangeRunExperimentType unit test stubs"""

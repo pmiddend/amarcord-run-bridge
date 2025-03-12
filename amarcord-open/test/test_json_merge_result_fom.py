@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_merge_result_fom import JsonMergeResultFom
+from amarcord_open.models.json_merge_result_fom import JsonMergeResultFom
 
 class TestJsonMergeResultFom(unittest.TestCase):
     """JsonMergeResultFom unit test stubs"""
@@ -57,7 +57,7 @@ class TestJsonMergeResultFom(unittest.TestCase):
                 rano_over_r_split = 1.337,
                 d1sig = 1.337,
                 d2sig = 1.337,
-                outer_shell = openapi_client.models.json_merge_result_outer_shell.JsonMergeResultOuterShell(
+                outer_shell = amarcord_open.models.json_merge_result_outer_shell.JsonMergeResultOuterShell(
                     resolution = 1.337, 
                     ccstar = 1.337, 
                     r_split = 1.337, 
@@ -87,7 +87,7 @@ class TestJsonMergeResultFom(unittest.TestCase):
                 ccstar = 1.337,
                 d1sig = 1.337,
                 d2sig = 1.337,
-                outer_shell = openapi_client.models.json_merge_result_outer_shell.JsonMergeResultOuterShell(
+                outer_shell = amarcord_open.models.json_merge_result_outer_shell.JsonMergeResultOuterShell(
                     resolution = 1.337, 
                     ccstar = 1.337, 
                     r_split = 1.337, 

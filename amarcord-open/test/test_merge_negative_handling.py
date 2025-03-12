@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.merge_negative_handling import MergeNegativeHandling
+from amarcord_open.models.merge_negative_handling import MergeNegativeHandling
 
 class TestMergeNegativeHandling(unittest.TestCase):
     """MergeNegativeHandling unit test stubs"""

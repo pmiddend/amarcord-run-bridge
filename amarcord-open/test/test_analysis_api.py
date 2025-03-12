@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.api.analysis_api import AnalysisApi
+from amarcord_open.api.analysis_api import AnalysisApi
 
 
 class TestAnalysisApi(unittest.IsolatedAsyncioTestCase):
@@ -24,7 +24,7 @@ class TestAnalysisApi(unittest.IsolatedAsyncioTestCase):
         self.api = AnalysisApi()
 
     async def asyncTearDown(self) -> None:
-        pass
+        await self.api.api_client.close()
 
     async def test_read_analysis_results_api_analysis_analysis_results_post(self) -> None:
         """Test case for read_analysis_results_api_analysis_analysis_results_post

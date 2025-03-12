@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.merge_model import MergeModel
+from amarcord_open.models.merge_model import MergeModel
 
 class TestMergeModel(unittest.TestCase):
     """MergeModel unit test stubs"""

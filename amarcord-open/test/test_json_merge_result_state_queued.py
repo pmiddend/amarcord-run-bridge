@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_merge_result_state_queued import JsonMergeResultStateQueued
+from amarcord_open.models.json_merge_result_state_queued import JsonMergeResultStateQueued
 
 class TestJsonMergeResultStateQueued(unittest.TestCase):
     """JsonMergeResultStateQueued unit test stubs"""

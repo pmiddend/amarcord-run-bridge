@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_schema_string import JSONSchemaString
+from amarcord_open.models.json_schema_string import JSONSchemaString
 
 class TestJSONSchemaString(unittest.TestCase):
     """JSONSchemaString unit test stubs"""

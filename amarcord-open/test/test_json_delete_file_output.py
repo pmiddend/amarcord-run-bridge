@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_delete_file_output import JsonDeleteFileOutput
+from amarcord_open.models.json_delete_file_output import JsonDeleteFileOutput
 
 class TestJsonDeleteFileOutput(unittest.TestCase):
     """JsonDeleteFileOutput unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_read_events import JsonReadEvents
+from amarcord_open.models.json_read_events import JsonReadEvents
 
 class TestJsonReadEvents(unittest.TestCase):
     """JsonReadEvents unit test stubs"""
@@ -36,14 +36,14 @@ class TestJsonReadEvents(unittest.TestCase):
         if include_optional:
             return JsonReadEvents(
                 events = [
-                    openapi_client.models.json_event.JsonEvent(
+                    amarcord_open.models.json_event.JsonEvent(
                         id = 56, 
                         source = '', 
                         text = '', 
                         created = 56, 
                         level = '', 
                         files = [
-                            openapi_client.models.json_file_output.JsonFileOutput(
+                            amarcord_open.models.json_file_output.JsonFileOutput(
                                 id = 56, 
                                 description = '', 
                                 type_ = '', 
@@ -56,14 +56,14 @@ class TestJsonReadEvents(unittest.TestCase):
         else:
             return JsonReadEvents(
                 events = [
-                    openapi_client.models.json_event.JsonEvent(
+                    amarcord_open.models.json_event.JsonEvent(
                         id = 56, 
                         source = '', 
                         text = '', 
                         created = 56, 
                         level = '', 
                         files = [
-                            openapi_client.models.json_file_output.JsonFileOutput(
+                            amarcord_open.models.json_file_output.JsonFileOutput(
                                 id = 56, 
                                 description = '', 
                                 type_ = '', 

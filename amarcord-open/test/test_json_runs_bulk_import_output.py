@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_runs_bulk_import_output import JsonRunsBulkImportOutput
+from amarcord_open.models.json_runs_bulk_import_output import JsonRunsBulkImportOutput
 
 class TestJsonRunsBulkImportOutput(unittest.TestCase):
     """JsonRunsBulkImportOutput unit test stubs"""
@@ -45,12 +45,12 @@ class TestJsonRunsBulkImportOutput(unittest.TestCase):
                     ],
                 number_of_runs = 56,
                 data_sets = [
-                    openapi_client.models.json_data_set.JsonDataSet(
+                    amarcord_open.models.json_data_set.JsonDataSet(
                         id = 56, 
                         experiment_type_id = 56, 
                         beamtime_id = 56, 
                         attributi = [
-                            openapi_client.models.json_attributo_value.JsonAttributoValue(
+                            amarcord_open.models.json_attributo_value.JsonAttributoValue(
                                 attributo_id = 56, 
                                 attributo_value_str = '', 
                                 attributo_value_int = 56, 
@@ -82,12 +82,12 @@ class TestJsonRunsBulkImportOutput(unittest.TestCase):
                     ],
                 number_of_runs = 56,
                 data_sets = [
-                    openapi_client.models.json_data_set.JsonDataSet(
+                    amarcord_open.models.json_data_set.JsonDataSet(
                         id = 56, 
                         experiment_type_id = 56, 
                         beamtime_id = 56, 
                         attributi = [
-                            openapi_client.models.json_attributo_value.JsonAttributoValue(
+                            amarcord_open.models.json_attributo_value.JsonAttributoValue(
                                 attributo_id = 56, 
                                 attributo_value_str = '', 
                                 attributo_value_int = 56, 

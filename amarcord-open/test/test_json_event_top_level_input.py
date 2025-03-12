@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_event_top_level_input import JsonEventTopLevelInput
+from amarcord_open.models.json_event_top_level_input import JsonEventTopLevelInput
 
 class TestJsonEventTopLevelInput(unittest.TestCase):
     """JsonEventTopLevelInput unit test stubs"""
@@ -36,7 +36,7 @@ class TestJsonEventTopLevelInput(unittest.TestCase):
         if include_optional:
             return JsonEventTopLevelInput(
                 beamtime_id = 56,
-                event = openapi_client.models.json_event_input.JsonEventInput(
+                event = amarcord_open.models.json_event_input.JsonEventInput(
                     source = '', 
                     text = '', 
                     level = '', 
@@ -48,7 +48,7 @@ class TestJsonEventTopLevelInput(unittest.TestCase):
         else:
             return JsonEventTopLevelInput(
                 beamtime_id = 56,
-                event = openapi_client.models.json_event_input.JsonEventInput(
+                event = amarcord_open.models.json_event_input.JsonEventInput(
                     source = '', 
                     text = '', 
                     level = '', 

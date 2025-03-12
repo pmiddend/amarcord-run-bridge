@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.api.processing_api import ProcessingApi
+from amarcord_open.api.processing_api import ProcessingApi
 
 
 class TestProcessingApi(unittest.IsolatedAsyncioTestCase):
@@ -24,7 +24,7 @@ class TestProcessingApi(unittest.IsolatedAsyncioTestCase):
         self.api = ProcessingApi()
 
     async def asyncTearDown(self) -> None:
-        pass
+        await self.api.api_client.close()
 
     async def test_indexing_job_finish_successfully_api_indexing_indexing_result_id_success_post(self) -> None:
         """Test case for indexing_job_finish_successfully_api_indexing_indexing_result_id_success_post

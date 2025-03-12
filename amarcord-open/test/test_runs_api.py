@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.api.runs_api import RunsApi
+from amarcord_open.api.runs_api import RunsApi
 
 
 class TestRunsApi(unittest.IsolatedAsyncioTestCase):
@@ -24,7 +24,7 @@ class TestRunsApi(unittest.IsolatedAsyncioTestCase):
         self.api = RunsApi()
 
     async def asyncTearDown(self) -> None:
-        pass
+        await self.api.api_client.close()
 
     async def test_bulk_import_api_run_bulk_import_beamtime_id_post(self) -> None:
         """Test case for bulk_import_api_run_bulk_import_beamtime_id_post

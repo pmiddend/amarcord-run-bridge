@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_update_live_stream import JsonUpdateLiveStream
+from amarcord_open.models.json_update_live_stream import JsonUpdateLiveStream
 
 class TestJsonUpdateLiveStream(unittest.TestCase):
     """JsonUpdateLiveStream unit test stubs"""

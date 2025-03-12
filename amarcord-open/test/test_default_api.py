@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.api.default_api import DefaultApi
+from amarcord_open.api.default_api import DefaultApi
 
 
 class TestDefaultApi(unittest.IsolatedAsyncioTestCase):
@@ -24,7 +24,7 @@ class TestDefaultApi(unittest.IsolatedAsyncioTestCase):
         self.api = DefaultApi()
 
     async def asyncTearDown(self) -> None:
-        pass
+        await self.api.api_client.close()
 
     async def test_check_standard_unit_api_unit_post(self) -> None:
         """Test case for check_standard_unit_api_unit_post

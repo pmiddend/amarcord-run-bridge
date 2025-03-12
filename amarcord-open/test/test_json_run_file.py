@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_run_file import JsonRunFile
+from amarcord_open.models.json_run_file import JsonRunFile
 
 class TestJsonRunFile(unittest.TestCase):
     """JsonRunFile unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_data_set_with_fom import JsonDataSetWithFom
+from amarcord_open.models.json_data_set_with_fom import JsonDataSetWithFom
 
 class TestJsonDataSetWithFom(unittest.TestCase):
     """JsonDataSetWithFom unit test stubs"""
@@ -35,12 +35,12 @@ class TestJsonDataSetWithFom(unittest.TestCase):
         model = JsonDataSetWithFom()
         if include_optional:
             return JsonDataSetWithFom(
-                data_set = openapi_client.models.json_data_set.JsonDataSet(
+                data_set = amarcord_open.models.json_data_set.JsonDataSet(
                     id = 56, 
                     experiment_type_id = 56, 
                     beamtime_id = 56, 
                     attributi = [
-                        openapi_client.models.json_attributo_value.JsonAttributoValue(
+                        amarcord_open.models.json_attributo_value.JsonAttributoValue(
                             attributo_id = 56, 
                             attributo_value_str = '', 
                             attributo_value_int = 56, 
@@ -58,7 +58,7 @@ class TestJsonDataSetWithFom(unittest.TestCase):
                                 True
                                 ], )
                         ], ),
-                fom = openapi_client.models.json_indexing_fom.JsonIndexingFom(
+                fom = amarcord_open.models.json_indexing_fom.JsonIndexingFom(
                     hit_rate = 1.337, 
                     indexing_rate = 1.337, 
                     indexed_frames = 56, 
@@ -67,12 +67,12 @@ class TestJsonDataSetWithFom(unittest.TestCase):
             )
         else:
             return JsonDataSetWithFom(
-                data_set = openapi_client.models.json_data_set.JsonDataSet(
+                data_set = amarcord_open.models.json_data_set.JsonDataSet(
                     id = 56, 
                     experiment_type_id = 56, 
                     beamtime_id = 56, 
                     attributi = [
-                        openapi_client.models.json_attributo_value.JsonAttributoValue(
+                        amarcord_open.models.json_attributo_value.JsonAttributoValue(
                             attributo_id = 56, 
                             attributo_value_str = '', 
                             attributo_value_int = 56, 
@@ -90,7 +90,7 @@ class TestJsonDataSetWithFom(unittest.TestCase):
                                 True
                                 ], )
                         ], ),
-                fom = openapi_client.models.json_indexing_fom.JsonIndexingFom(
+                fom = amarcord_open.models.json_indexing_fom.JsonIndexingFom(
                     hit_rate = 1.337, 
                     indexing_rate = 1.337, 
                     indexed_frames = 56, 

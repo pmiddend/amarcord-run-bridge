@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_create_chemical_output import JsonCreateChemicalOutput
+from amarcord_open.models.json_create_chemical_output import JsonCreateChemicalOutput
 
 class TestJsonCreateChemicalOutput(unittest.TestCase):
     """JsonCreateChemicalOutput unit test stubs"""

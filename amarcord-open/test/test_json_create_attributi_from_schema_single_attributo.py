@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_create_attributi_from_schema_single_attributo import JsonCreateAttributiFromSchemaSingleAttributo
+from amarcord_open.models.json_create_attributi_from_schema_single_attributo import JsonCreateAttributiFromSchemaSingleAttributo
 
 class TestJsonCreateAttributiFromSchemaSingleAttributo(unittest.TestCase):
     """JsonCreateAttributiFromSchemaSingleAttributo unit test stubs"""

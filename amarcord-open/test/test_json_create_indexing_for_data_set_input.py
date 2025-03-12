@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_create_indexing_for_data_set_input import JsonCreateIndexingForDataSetInput
+from amarcord_open.models.json_create_indexing_for_data_set_input import JsonCreateIndexingForDataSetInput
 
 class TestJsonCreateIndexingForDataSetInput(unittest.TestCase):
     """JsonCreateIndexingForDataSetInput unit test stubs"""

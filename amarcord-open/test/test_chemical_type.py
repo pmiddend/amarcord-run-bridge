@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.chemical_type import ChemicalType
+from amarcord_open.models.chemical_type import ChemicalType
 
 class TestChemicalType(unittest.TestCase):
     """ChemicalType unit test stubs"""

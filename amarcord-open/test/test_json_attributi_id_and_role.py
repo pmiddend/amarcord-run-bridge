@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_attributi_id_and_role import JsonAttributiIdAndRole
+from amarcord_open.models.json_attributi_id_and_role import JsonAttributiIdAndRole
 
 class TestJsonAttributiIdAndRole(unittest.TestCase):
     """JsonAttributiIdAndRole unit test stubs"""

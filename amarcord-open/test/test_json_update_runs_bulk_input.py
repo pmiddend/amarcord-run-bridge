@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_update_runs_bulk_input import JsonUpdateRunsBulkInput
+from amarcord_open.models.json_update_runs_bulk_input import JsonUpdateRunsBulkInput
 
 class TestJsonUpdateRunsBulkInput(unittest.TestCase):
     """JsonUpdateRunsBulkInput unit test stubs"""
@@ -40,7 +40,7 @@ class TestJsonUpdateRunsBulkInput(unittest.TestCase):
                     56
                     ],
                 attributi = [
-                    openapi_client.models.json_attributo_value.JsonAttributoValue(
+                    amarcord_open.models.json_attributo_value.JsonAttributoValue(
                         attributo_id = 56, 
                         attributo_value_str = '', 
                         attributo_value_int = 56, 
@@ -67,7 +67,7 @@ class TestJsonUpdateRunsBulkInput(unittest.TestCase):
                     56
                     ],
                 attributi = [
-                    openapi_client.models.json_attributo_value.JsonAttributoValue(
+                    amarcord_open.models.json_attributo_value.JsonAttributoValue(
                         attributo_id = 56, 
                         attributo_value_str = '', 
                         attributo_value_int = 56, 

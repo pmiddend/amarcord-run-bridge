@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_copy_experiment_types_input import JsonCopyExperimentTypesInput
+from amarcord_open.models.json_copy_experiment_types_input import JsonCopyExperimentTypesInput
 
 class TestJsonCopyExperimentTypesInput(unittest.TestCase):
     """JsonCopyExperimentTypesInput unit test stubs"""

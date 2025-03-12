@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_create_experiment_type_input import JsonCreateExperimentTypeInput
+from amarcord_open.models.json_create_experiment_type_input import JsonCreateExperimentTypeInput
 
 class TestJsonCreateExperimentTypeInput(unittest.TestCase):
     """JsonCreateExperimentTypeInput unit test stubs"""
@@ -38,7 +38,7 @@ class TestJsonCreateExperimentTypeInput(unittest.TestCase):
                 name = '',
                 beamtime_id = 56,
                 attributi = [
-                    openapi_client.models.json_attributi_id_and_role.JsonAttributiIdAndRole(
+                    amarcord_open.models.json_attributi_id_and_role.JsonAttributiIdAndRole(
                         id = 56, 
                         role = 'crystal', )
                     ]
@@ -48,7 +48,7 @@ class TestJsonCreateExperimentTypeInput(unittest.TestCase):
                 name = '',
                 beamtime_id = 56,
                 attributi = [
-                    openapi_client.models.json_attributi_id_and_role.JsonAttributiIdAndRole(
+                    amarcord_open.models.json_attributi_id_and_role.JsonAttributiIdAndRole(
                         id = 56, 
                         role = 'crystal', )
                     ],

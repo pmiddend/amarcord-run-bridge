@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_chemical_with_id import JsonChemicalWithId
+from amarcord_open.models.json_chemical_with_id import JsonChemicalWithId
 
 class TestJsonChemicalWithId(unittest.TestCase):
     """JsonChemicalWithId unit test stubs"""
@@ -41,7 +41,7 @@ class TestJsonChemicalWithId(unittest.TestCase):
                 responsible_person = '',
                 chemical_type = 'crystal',
                 attributi = [
-                    openapi_client.models.json_attributo_value.JsonAttributoValue(
+                    amarcord_open.models.json_attributo_value.JsonAttributoValue(
                         attributo_id = 56, 
                         attributo_value_str = '', 
                         attributo_value_int = 56, 
@@ -71,7 +71,7 @@ class TestJsonChemicalWithId(unittest.TestCase):
                 responsible_person = '',
                 chemical_type = 'crystal',
                 attributi = [
-                    openapi_client.models.json_attributo_value.JsonAttributoValue(
+                    amarcord_open.models.json_attributo_value.JsonAttributoValue(
                         attributo_id = 56, 
                         attributo_value_str = '', 
                         attributo_value_int = 56, 

@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_merge_parameters import JsonMergeParameters
+from amarcord_open.models.json_merge_parameters import JsonMergeParameters
 
 class TestJsonMergeParameters(unittest.TestCase):
     """JsonMergeParameters unit test stubs"""
@@ -43,7 +43,7 @@ class TestJsonMergeParameters(unittest.TestCase):
                 scale_intensities = 'off',
                 post_refinement = True,
                 iterations = 56,
-                polarisation = openapi_client.models.json_polarisation.JsonPolarisation(
+                polarisation = amarcord_open.models.json_polarisation.JsonPolarisation(
                     angle = 56, 
                     percent = 56, ),
                 start_after = 56,

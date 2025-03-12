@@ -1,30 +1,29 @@
-import asyncio
 import datetime
-import json
 from dataclasses import dataclass
 from enum import Enum
-from pathlib import Path
 from statistics import mean
-from typing import Any, TypeAlias
-from typing_extensions import Self
+from types import TracebackType
+from typing import Any
+from typing import TypeAlias
 
 import structlog
-from openapi_client.api.attributi_api import AttributiApi
-from openapi_client.api.runs_api import RunsApi
-from openapi_client.api_client import ApiClient
-from openapi_client.configuration import Configuration
-from openapi_client.models import AttributoType
-from openapi_client.models import JsonAttributoValue
-from openapi_client.models import JsonCreateAttributiFromSchemaInput
-from openapi_client.models import JsonCreateAttributiFromSchemaSingleAttributo
-from openapi_client.models import JsonCreateOrUpdateRun
-from openapi_client.models import JsonRunFile
-from openapi_client.models import JSONSchemaArray
-from openapi_client.models import JSONSchemaBoolean
-from openapi_client.models import JSONSchemaInteger
-from openapi_client.models import JSONSchemaNumber
-from openapi_client.models import JSONSchemaString
+from amarcord_open.api.attributi_api import AttributiApi
+from amarcord_open.api.runs_api import RunsApi
+from amarcord_open.api_client import ApiClient
+from amarcord_open.configuration import Configuration
+from amarcord_open.models import AttributoType
+from amarcord_open.models import JsonAttributoValue
+from amarcord_open.models import JsonCreateAttributiFromSchemaInput
+from amarcord_open.models import JsonCreateAttributiFromSchemaSingleAttributo
+from amarcord_open.models import JsonCreateOrUpdateRun
+from amarcord_open.models import JsonRunFile
+from amarcord_open.models import JSONSchemaArray
+from amarcord_open.models import JSONSchemaBoolean
+from amarcord_open.models import JSONSchemaInteger
+from amarcord_open.models import JSONSchemaNumber
+from amarcord_open.models import JSONSchemaString
 from pydantic import BaseModel
+from typing_extensions import Self
 
 from run_bridge.logging_util import setup_structlog
 
@@ -272,7 +271,10 @@ class Server:
             host=config.amarcord_url, username=username, password=password
         )
         api_client = ApiClient(configuration)
-        auth_headers = {"Authorization": configuration.get_basic_auth_token()}
+        auth_token = configuration.get_basic_auth_token()
+        auth_headers: dict[str, str] = (
+            {"Authorization": auth_token} if auth_token else {}
+        )
 
         existing_attributo_names = set(
             a.name
@@ -293,8 +295,14 @@ class Server:
     async def __aenter__(self) -> Self:
         return self
 
-    async def __aexit__(self, exc_type, exc_value, traceback) -> None:
+    async def __aexit__(
+        self,
+        exc_type: type[BaseException] | None,
+        exc_value: BaseException | None,
+        traceback: TracebackType | None,
+    ) -> bool:
         await self._api_client.close()
+        return True
 
     def __init__(
         self,
@@ -319,14 +327,6 @@ class Server:
             ).attributi
         )
 
-        for ad in self._config.attributi:
-            ad_json = JsonCreateAttributiFromSchemaSingleAttributo(
-                attributo_name=ad.attributo_name,
-                description=ad.attributo_description,
-                attributo_type=ad.amarcord_type,
-            )
-            assert ad.amarcord_type.to_json() != "null"
-            logger.info(f"json: {ad.amarcord_type.to_json()}")
         new_attributi = [
             JsonCreateAttributiFromSchemaSingleAttributo(
                 attributo_name=ad.attributo_name,
@@ -336,8 +336,6 @@ class Server:
             for ad in self._config.attributi
             if ad.attributo_name not in existing_attributo_names
         ]
-
-        logger.info(f"sending {new_attributi[0].to_json()}")
 
         if not new_attributi:
             logger.info("no new attributi detected, not doing anything")
@@ -361,7 +359,6 @@ class Server:
             run_logger.info(
                 f"start run, but prior {prior_run.run_id} is not finished, closing"
             )
-            # FIXME: close prior run
 
         api_instance = AttributiApi(self._api_client)
 
@@ -380,7 +377,7 @@ class Server:
             attribute_names_to_values={
                 a.attribute_name: [a.value] for a in c.attributo_values
             },
-            attributi=config.attributi,
+            attributi=self._config.attributi,
             attributo_name_to_id=attributo_name_to_id,
             files=c.files,
             started=datetime_to_attributo_int(

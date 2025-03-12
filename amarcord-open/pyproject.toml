@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "openapi_client"
+name = "amarcord_open"
 version = "1.0.0"
 description = "AMARCORD OpenAPI"
 authors = ["OpenAPI Generator Community <team@openapitools.org>"]
@@ -7,7 +7,7 @@ license = "NoLicense"
 readme = "README.md"
 repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
 keywords = ["OpenAPI", "OpenAPI-Generator", "AMARCORD OpenAPI"]
-include = ["openapi_client/py.typed"]
+include = ["amarcord_open/py.typed"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -37,7 +37,7 @@ extension-pkg-whitelist = "pydantic"
 
 [tool.mypy]
 files = [
-  "openapi_client",
+  "amarcord_open",
   #"test",  # auto-generated tests
   "tests", # hand-written tests
 ]
@@ -75,7 +75,7 @@ disallow_any_generics = true
 
 [[tool.mypy.overrides]]
 module = [
-  "openapi_client.configuration",
+  "amarcord_open.configuration",
 ]
 warn_unused_ignores = true
 strict_equality = true

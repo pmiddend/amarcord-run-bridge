@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.api.files_api import FilesApi
+from amarcord_open.api.files_api import FilesApi
 
 
 class TestFilesApi(unittest.IsolatedAsyncioTestCase):
@@ -24,7 +24,7 @@ class TestFilesApi(unittest.IsolatedAsyncioTestCase):
         self.api = FilesApi()
 
     async def asyncTearDown(self) -> None:
-        pass
+        await self.api.api_client.close()
 
     async def test_create_file_api_files_post(self) -> None:
         """Test case for create_file_api_files_post

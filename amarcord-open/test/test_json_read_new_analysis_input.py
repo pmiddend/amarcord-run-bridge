@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_read_new_analysis_input import JsonReadNewAnalysisInput
+from amarcord_open.models.json_read_new_analysis_input import JsonReadNewAnalysisInput
 
 class TestJsonReadNewAnalysisInput(unittest.TestCase):
     """JsonReadNewAnalysisInput unit test stubs"""
@@ -36,7 +36,7 @@ class TestJsonReadNewAnalysisInput(unittest.TestCase):
         if include_optional:
             return JsonReadNewAnalysisInput(
                 attributi_filter = [
-                    openapi_client.models.json_attributo_value.JsonAttributoValue(
+                    amarcord_open.models.json_attributo_value.JsonAttributoValue(
                         attributo_id = 56, 
                         attributo_value_str = '', 
                         attributo_value_int = 56, 
@@ -60,7 +60,7 @@ class TestJsonReadNewAnalysisInput(unittest.TestCase):
         else:
             return JsonReadNewAnalysisInput(
                 attributi_filter = [
-                    openapi_client.models.json_attributo_value.JsonAttributoValue(
+                    amarcord_open.models.json_attributo_value.JsonAttributoValue(
                         attributo_id = 56, 
                         attributo_value_str = '', 
                         attributo_value_int = 56, 

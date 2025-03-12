@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_schema_boolean import JSONSchemaBoolean
+from amarcord_open.models.json_schema_boolean import JSONSchemaBoolean
 
 class TestJSONSchemaBoolean(unittest.TestCase):
     """JSONSchemaBoolean unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_experiment_type_with_beamtime_information import JsonExperimentTypeWithBeamtimeInformation
+from amarcord_open.models.json_experiment_type_with_beamtime_information import JsonExperimentTypeWithBeamtimeInformation
 
 class TestJsonExperimentTypeWithBeamtimeInformation(unittest.TestCase):
     """JsonExperimentTypeWithBeamtimeInformation unit test stubs"""
@@ -35,15 +35,15 @@ class TestJsonExperimentTypeWithBeamtimeInformation(unittest.TestCase):
         model = JsonExperimentTypeWithBeamtimeInformation()
         if include_optional:
             return JsonExperimentTypeWithBeamtimeInformation(
-                experiment_type = openapi_client.models.json_experiment_type.JsonExperimentType(
+                experiment_type = amarcord_open.models.json_experiment_type.JsonExperimentType(
                     id = 56, 
                     name = '', 
                     attributi = [
-                        openapi_client.models.json_attributi_id_and_role.JsonAttributiIdAndRole(
+                        amarcord_open.models.json_attributi_id_and_role.JsonAttributiIdAndRole(
                             id = 56, 
                             role = 'crystal', )
                         ], ),
-                beamtime = openapi_client.models.json_beamtime.JsonBeamtime(
+                beamtime = amarcord_open.models.json_beamtime.JsonBeamtime(
                     id = 56, 
                     external_id = '', 
                     proposal = '', 
@@ -59,15 +59,15 @@ class TestJsonExperimentTypeWithBeamtimeInformation(unittest.TestCase):
             )
         else:
             return JsonExperimentTypeWithBeamtimeInformation(
-                experiment_type = openapi_client.models.json_experiment_type.JsonExperimentType(
+                experiment_type = amarcord_open.models.json_experiment_type.JsonExperimentType(
                     id = 56, 
                     name = '', 
                     attributi = [
-                        openapi_client.models.json_attributi_id_and_role.JsonAttributiIdAndRole(
+                        amarcord_open.models.json_attributi_id_and_role.JsonAttributiIdAndRole(
                             id = 56, 
                             role = 'crystal', )
                         ], ),
-                beamtime = openapi_client.models.json_beamtime.JsonBeamtime(
+                beamtime = amarcord_open.models.json_beamtime.JsonBeamtime(
                     id = 56, 
                     external_id = '', 
                     proposal = '', 

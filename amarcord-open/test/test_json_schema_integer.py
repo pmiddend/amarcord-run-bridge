@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_schema_integer import JSONSchemaInteger
+from amarcord_open.models.json_schema_integer import JSONSchemaInteger
 
 class TestJSONSchemaInteger(unittest.TestCase):
     """JSONSchemaInteger unit test stubs"""

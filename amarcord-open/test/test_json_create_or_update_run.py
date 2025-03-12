@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_create_or_update_run import JsonCreateOrUpdateRun
+from amarcord_open.models.json_create_or_update_run import JsonCreateOrUpdateRun
 
 class TestJsonCreateOrUpdateRun(unittest.TestCase):
     """JsonCreateOrUpdateRun unit test stubs"""
@@ -37,7 +37,7 @@ class TestJsonCreateOrUpdateRun(unittest.TestCase):
             return JsonCreateOrUpdateRun(
                 beamtime_id = 56,
                 attributi = [
-                    openapi_client.models.json_attributo_value.JsonAttributoValue(
+                    amarcord_open.models.json_attributo_value.JsonAttributoValue(
                         attributo_id = 56, 
                         attributo_value_str = '', 
                         attributo_value_int = 56, 
@@ -56,7 +56,7 @@ class TestJsonCreateOrUpdateRun(unittest.TestCase):
                             ], )
                     ],
                 files = [
-                    openapi_client.models.json_run_file.JsonRunFile(
+                    amarcord_open.models.json_run_file.JsonRunFile(
                         id = 56, 
                         glob = '', 
                         source = '', )
@@ -68,7 +68,7 @@ class TestJsonCreateOrUpdateRun(unittest.TestCase):
             return JsonCreateOrUpdateRun(
                 beamtime_id = 56,
                 attributi = [
-                    openapi_client.models.json_attributo_value.JsonAttributoValue(
+                    amarcord_open.models.json_attributo_value.JsonAttributoValue(
                         attributo_id = 56, 
                         attributo_value_str = '', 
                         attributo_value_int = 56, 

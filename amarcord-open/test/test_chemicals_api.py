@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.api.chemicals_api import ChemicalsApi
+from amarcord_open.api.chemicals_api import ChemicalsApi
 
 
 class TestChemicalsApi(unittest.IsolatedAsyncioTestCase):
@@ -24,7 +24,7 @@ class TestChemicalsApi(unittest.IsolatedAsyncioTestCase):
         self.api = ChemicalsApi()
 
     async def asyncTearDown(self) -> None:
-        pass
+        await self.api.api_client.close()
 
     async def test_copy_chemical_api_copy_chemical_post(self) -> None:
         """Test case for copy_chemical_api_copy_chemical_post

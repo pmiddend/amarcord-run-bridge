@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_merge_status import JsonMergeStatus
+from amarcord_open.models.json_merge_status import JsonMergeStatus
 
 class TestJsonMergeStatus(unittest.TestCase):
     """JsonMergeStatus unit test stubs"""

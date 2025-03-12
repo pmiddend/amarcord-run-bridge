@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_user_config import JsonUserConfig
+from amarcord_open.models.json_user_config import JsonUserConfig
 
 class TestJsonUserConfig(unittest.TestCase):
     """JsonUserConfig unit test stubs"""

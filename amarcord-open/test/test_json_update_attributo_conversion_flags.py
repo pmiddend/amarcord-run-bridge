@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_update_attributo_conversion_flags import JsonUpdateAttributoConversionFlags
+from amarcord_open.models.json_update_attributo_conversion_flags import JsonUpdateAttributoConversionFlags
 
 class TestJsonUpdateAttributoConversionFlags(unittest.TestCase):
     """JsonUpdateAttributoConversionFlags unit test stubs"""

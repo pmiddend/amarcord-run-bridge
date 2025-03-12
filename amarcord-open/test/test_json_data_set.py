@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_data_set import JsonDataSet
+from amarcord_open.models.json_data_set import JsonDataSet
 
 class TestJsonDataSet(unittest.TestCase):
     """JsonDataSet unit test stubs"""
@@ -39,7 +39,7 @@ class TestJsonDataSet(unittest.TestCase):
                 experiment_type_id = 56,
                 beamtime_id = 56,
                 attributi = [
-                    openapi_client.models.json_attributo_value.JsonAttributoValue(
+                    amarcord_open.models.json_attributo_value.JsonAttributoValue(
                         attributo_id = 56, 
                         attributo_value_str = '', 
                         attributo_value_int = 56, 
@@ -64,7 +64,7 @@ class TestJsonDataSet(unittest.TestCase):
                 experiment_type_id = 56,
                 beamtime_id = 56,
                 attributi = [
-                    openapi_client.models.json_attributo_value.JsonAttributoValue(
+                    amarcord_open.models.json_attributo_value.JsonAttributoValue(
                         attributo_id = 56, 
                         attributo_value_str = '', 
                         attributo_value_int = 56, 

@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_schema_array_subtype import JSONSchemaArraySubtype
+from amarcord_open.models.json_schema_array_subtype import JSONSchemaArraySubtype
 
 class TestJSONSchemaArraySubtype(unittest.TestCase):
     """JSONSchemaArraySubtype unit test stubs"""

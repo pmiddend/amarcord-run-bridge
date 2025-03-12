@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.associated_table import AssociatedTable
+from amarcord_open.models.associated_table import AssociatedTable
 
 class TestAssociatedTable(unittest.TestCase):
     """AssociatedTable unit test stubs"""

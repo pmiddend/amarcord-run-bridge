@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_beamtime_schedule_output import JsonBeamtimeScheduleOutput
+from amarcord_open.models.json_beamtime_schedule_output import JsonBeamtimeScheduleOutput
 
 class TestJsonBeamtimeScheduleOutput(unittest.TestCase):
     """JsonBeamtimeScheduleOutput unit test stubs"""
@@ -36,7 +36,7 @@ class TestJsonBeamtimeScheduleOutput(unittest.TestCase):
         if include_optional:
             return JsonBeamtimeScheduleOutput(
                 schedule = [
-                    openapi_client.models.json_beamtime_schedule_row.JsonBeamtimeScheduleRow(
+                    amarcord_open.models.json_beamtime_schedule_row.JsonBeamtimeScheduleRow(
                         users = '', 
                         date = '', 
                         shift = '', 
@@ -52,7 +52,7 @@ class TestJsonBeamtimeScheduleOutput(unittest.TestCase):
         else:
             return JsonBeamtimeScheduleOutput(
                 schedule = [
-                    openapi_client.models.json_beamtime_schedule_row.JsonBeamtimeScheduleRow(
+                    amarcord_open.models.json_beamtime_schedule_row.JsonBeamtimeScheduleRow(
                         users = '', 
                         date = '', 
                         shift = '', 

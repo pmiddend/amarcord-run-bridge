@@ -8,9 +8,9 @@ from typing import Any
 from typing import TypeAlias
 
 import structlog
-from openapi_client.api.beamtimes_api import BeamtimesApi
-from openapi_client.api_client import ApiClient
-from openapi_client.configuration import Configuration
+from amarcord_open.api.beamtimes_api import BeamtimesApi
+from amarcord_open.api_client import ApiClient
+from amarcord_open.configuration import Configuration
 from pydantic import BaseModel
 from tango import DeviceProxy
 from tango import GreenMode

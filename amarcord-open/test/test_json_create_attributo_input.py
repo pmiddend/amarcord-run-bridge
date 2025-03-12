@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_create_attributo_input import JsonCreateAttributoInput
+from amarcord_open.models.json_create_attributo_input import JsonCreateAttributoInput
 
 class TestJsonCreateAttributoInput(unittest.TestCase):
     """JsonCreateAttributoInput unit test stubs"""
@@ -40,10 +40,10 @@ class TestJsonCreateAttributoInput(unittest.TestCase):
                 description = '',
                 group = '',
                 associated_table = 'run',
-                attributo_type_integer = openapi_client.models.json_schema_integer.JSONSchemaInteger(
+                attributo_type_integer = amarcord_open.models.json_schema_integer.JSONSchemaInteger(
                     type = 'integer', 
                     format = 'date-time', ),
-                attributo_type_number = openapi_client.models.json_schema_number.JSONSchemaNumber(
+                attributo_type_number = amarcord_open.models.json_schema_number.JSONSchemaNumber(
                     type = 'number', 
                     minimum = 1.337, 
                     maximum = 1.337, 
@@ -53,17 +53,17 @@ class TestJsonCreateAttributoInput(unittest.TestCase):
                     format = 'standard-unit', 
                     tolerance = 1.337, 
                     tolerance_is_absolute = True, ),
-                attributo_type_string = openapi_client.models.json_schema_string.JSONSchemaString(
+                attributo_type_string = amarcord_open.models.json_schema_string.JSONSchemaString(
                     type = 'string', 
                     enum = [
                         ''
                         ], ),
-                attributo_type_array = openapi_client.models.json_schema_array.JSONSchemaArray(
+                attributo_type_array = amarcord_open.models.json_schema_array.JSONSchemaArray(
                     type = 'array', 
                     item_type = 'string', 
                     min_items = 56, 
                     max_items = 56, ),
-                attributo_type_boolean = openapi_client.models.json_schema_boolean.JSONSchemaBoolean(
+                attributo_type_boolean = amarcord_open.models.json_schema_boolean.JSONSchemaBoolean(
                     type = 'boolean', )
             )
         else:

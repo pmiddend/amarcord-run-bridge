@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_create_data_set_input import JsonCreateDataSetInput
+from amarcord_open.models.json_create_data_set_input import JsonCreateDataSetInput
 
 class TestJsonCreateDataSetInput(unittest.TestCase):
     """JsonCreateDataSetInput unit test stubs"""
@@ -37,7 +37,7 @@ class TestJsonCreateDataSetInput(unittest.TestCase):
             return JsonCreateDataSetInput(
                 experiment_type_id = 56,
                 attributi = [
-                    openapi_client.models.json_attributo_value.JsonAttributoValue(
+                    amarcord_open.models.json_attributo_value.JsonAttributoValue(
                         attributo_id = 56, 
                         attributo_value_str = '', 
                         attributo_value_int = 56, 
@@ -60,7 +60,7 @@ class TestJsonCreateDataSetInput(unittest.TestCase):
             return JsonCreateDataSetInput(
                 experiment_type_id = 56,
                 attributi = [
-                    openapi_client.models.json_attributo_value.JsonAttributoValue(
+                    amarcord_open.models.json_attributo_value.JsonAttributoValue(
                         attributo_id = 56, 
                         attributo_value_str = '', 
                         attributo_value_int = 56, 

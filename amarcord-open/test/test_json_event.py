@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_event import JsonEvent
+from amarcord_open.models.json_event import JsonEvent
 
 class TestJsonEvent(unittest.TestCase):
     """JsonEvent unit test stubs"""
@@ -41,7 +41,7 @@ class TestJsonEvent(unittest.TestCase):
                 created = 56,
                 level = '',
                 files = [
-                    openapi_client.models.json_file_output.JsonFileOutput(
+                    amarcord_open.models.json_file_output.JsonFileOutput(
                         id = 56, 
                         description = '', 
                         type_ = '', 
@@ -58,7 +58,7 @@ class TestJsonEvent(unittest.TestCase):
                 created = 56,
                 level = '',
                 files = [
-                    openapi_client.models.json_file_output.JsonFileOutput(
+                    amarcord_open.models.json_file_output.JsonFileOutput(
                         id = 56, 
                         description = '', 
                         type_ = '', 

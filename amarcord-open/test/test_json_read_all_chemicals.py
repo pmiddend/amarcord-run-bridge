@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_read_all_chemicals import JsonReadAllChemicals
+from amarcord_open.models.json_read_all_chemicals import JsonReadAllChemicals
 
 class TestJsonReadAllChemicals(unittest.TestCase):
     """JsonReadAllChemicals unit test stubs"""
@@ -36,14 +36,14 @@ class TestJsonReadAllChemicals(unittest.TestCase):
         if include_optional:
             return JsonReadAllChemicals(
                 chemicals = [
-                    openapi_client.models.json_chemical.JsonChemical(
+                    amarcord_open.models.json_chemical.JsonChemical(
                         id = 56, 
                         beamtime_id = 56, 
                         name = '', 
                         responsible_person = '', 
                         chemical_type = 'crystal', 
                         attributi = [
-                            openapi_client.models.json_attributo_value.JsonAttributoValue(
+                            amarcord_open.models.json_attributo_value.JsonAttributoValue(
                                 attributo_id = 56, 
                                 attributo_value_str = '', 
                                 attributo_value_int = 56, 
@@ -62,7 +62,7 @@ class TestJsonReadAllChemicals(unittest.TestCase):
                                     ], )
                             ], 
                         files = [
-                            openapi_client.models.json_file_output.JsonFileOutput(
+                            amarcord_open.models.json_file_output.JsonFileOutput(
                                 id = 56, 
                                 description = '', 
                                 type_ = '', 
@@ -72,7 +72,7 @@ class TestJsonReadAllChemicals(unittest.TestCase):
                             ], )
                     ],
                 beamtimes = [
-                    openapi_client.models.json_beamtime.JsonBeamtime(
+                    amarcord_open.models.json_beamtime.JsonBeamtime(
                         id = 56, 
                         external_id = '', 
                         proposal = '', 
@@ -87,7 +87,7 @@ class TestJsonReadAllChemicals(unittest.TestCase):
                         analysis_output_path = '', )
                     ],
                 attributi_names = [
-                    openapi_client.models.json_attributo_with_name.JsonAttributoWithName(
+                    amarcord_open.models.json_attributo_with_name.JsonAttributoWithName(
                         id = 56, 
                         name = '', )
                     ]
@@ -95,14 +95,14 @@ class TestJsonReadAllChemicals(unittest.TestCase):
         else:
             return JsonReadAllChemicals(
                 chemicals = [
-                    openapi_client.models.json_chemical.JsonChemical(
+                    amarcord_open.models.json_chemical.JsonChemical(
                         id = 56, 
                         beamtime_id = 56, 
                         name = '', 
                         responsible_person = '', 
                         chemical_type = 'crystal', 
                         attributi = [
-                            openapi_client.models.json_attributo_value.JsonAttributoValue(
+                            amarcord_open.models.json_attributo_value.JsonAttributoValue(
                                 attributo_id = 56, 
                                 attributo_value_str = '', 
                                 attributo_value_int = 56, 
@@ -121,7 +121,7 @@ class TestJsonReadAllChemicals(unittest.TestCase):
                                     ], )
                             ], 
                         files = [
-                            openapi_client.models.json_file_output.JsonFileOutput(
+                            amarcord_open.models.json_file_output.JsonFileOutput(
                                 id = 56, 
                                 description = '', 
                                 type_ = '', 
@@ -131,7 +131,7 @@ class TestJsonReadAllChemicals(unittest.TestCase):
                             ], )
                     ],
                 beamtimes = [
-                    openapi_client.models.json_beamtime.JsonBeamtime(
+                    amarcord_open.models.json_beamtime.JsonBeamtime(
                         id = 56, 
                         external_id = '', 
                         proposal = '', 
@@ -146,7 +146,7 @@ class TestJsonReadAllChemicals(unittest.TestCase):
                         analysis_output_path = '', )
                     ],
                 attributi_names = [
-                    openapi_client.models.json_attributo_with_name.JsonAttributoWithName(
+                    amarcord_open.models.json_attributo_with_name.JsonAttributoWithName(
                         id = 56, 
                         name = '', )
                     ],

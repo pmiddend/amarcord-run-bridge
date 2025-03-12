@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.attributo_type import AttributoType
+from amarcord_open.models.attributo_type import AttributoType
 
 class TestAttributoType(unittest.TestCase):
     """AttributoType unit test stubs"""

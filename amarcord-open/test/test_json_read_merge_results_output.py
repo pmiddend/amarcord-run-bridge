@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_read_merge_results_output import JsonReadMergeResultsOutput
+from amarcord_open.models.json_read_merge_results_output import JsonReadMergeResultsOutput
 
 class TestJsonReadMergeResultsOutput(unittest.TestCase):
     """JsonReadMergeResultsOutput unit test stubs"""
@@ -36,11 +36,11 @@ class TestJsonReadMergeResultsOutput(unittest.TestCase):
         if include_optional:
             return JsonReadMergeResultsOutput(
                 merge_jobs = [
-                    openapi_client.models.json_merge_job.JsonMergeJob(
+                    amarcord_open.models.json_merge_job.JsonMergeJob(
                         id = 56, 
                         job_id = 56, 
                         job_status = 'queued', 
-                        parameters = openapi_client.models.json_merge_parameters.JsonMergeParameters(
+                        parameters = amarcord_open.models.json_merge_parameters.JsonMergeParameters(
                             point_group = '', 
                             space_group = '', 
                             cell_description = '', 
@@ -49,7 +49,7 @@ class TestJsonReadMergeResultsOutput(unittest.TestCase):
                             scale_intensities = 'off', 
                             post_refinement = True, 
                             iterations = 56, 
-                            polarisation = openapi_client.models.json_polarisation.JsonPolarisation(
+                            polarisation = amarcord_open.models.json_polarisation.JsonPolarisation(
                                 angle = 56, 
                                 percent = 56, ), 
                             start_after = 56, 
@@ -68,7 +68,7 @@ class TestJsonReadMergeResultsOutput(unittest.TestCase):
                             w = '', 
                             ambigator_command_line = '', ), 
                         indexing_results = [
-                            openapi_client.models.json_indexing_job.JsonIndexingJob(
+                            amarcord_open.models.json_indexing_job.JsonIndexingJob(
                                 id = 56, 
                                 job_id = 56, 
                                 job_status = 'queued', 
@@ -83,7 +83,7 @@ class TestJsonReadMergeResultsOutput(unittest.TestCase):
                                 command_line = '', 
                                 run_internal_id = 56, 
                                 run_external_id = 56, 
-                                beamtime = openapi_client.models.json_beamtime.JsonBeamtime(
+                                beamtime = amarcord_open.models.json_beamtime.JsonBeamtime(
                                     id = 56, 
                                     external_id = '', 
                                     proposal = '', 
@@ -101,7 +101,7 @@ class TestJsonReadMergeResultsOutput(unittest.TestCase):
                                     ], )
                             ], 
                         files_from_indexing = [
-                            openapi_client.models.json_file_output.JsonFileOutput(
+                            amarcord_open.models.json_file_output.JsonFileOutput(
                                 id = 56, 
                                 description = '', 
                                 type_ = '', 
@@ -116,11 +116,11 @@ class TestJsonReadMergeResultsOutput(unittest.TestCase):
         else:
             return JsonReadMergeResultsOutput(
                 merge_jobs = [
-                    openapi_client.models.json_merge_job.JsonMergeJob(
+                    amarcord_open.models.json_merge_job.JsonMergeJob(
                         id = 56, 
                         job_id = 56, 
                         job_status = 'queued', 
-                        parameters = openapi_client.models.json_merge_parameters.JsonMergeParameters(
+                        parameters = amarcord_open.models.json_merge_parameters.JsonMergeParameters(
                             point_group = '', 
                             space_group = '', 
                             cell_description = '', 
@@ -129,7 +129,7 @@ class TestJsonReadMergeResultsOutput(unittest.TestCase):
                             scale_intensities = 'off', 
                             post_refinement = True, 
                             iterations = 56, 
-                            polarisation = openapi_client.models.json_polarisation.JsonPolarisation(
+                            polarisation = amarcord_open.models.json_polarisation.JsonPolarisation(
                                 angle = 56, 
                                 percent = 56, ), 
                             start_after = 56, 
@@ -148,7 +148,7 @@ class TestJsonReadMergeResultsOutput(unittest.TestCase):
                             w = '', 
                             ambigator_command_line = '', ), 
                         indexing_results = [
-                            openapi_client.models.json_indexing_job.JsonIndexingJob(
+                            amarcord_open.models.json_indexing_job.JsonIndexingJob(
                                 id = 56, 
                                 job_id = 56, 
                                 job_status = 'queued', 
@@ -163,7 +163,7 @@ class TestJsonReadMergeResultsOutput(unittest.TestCase):
                                 command_line = '', 
                                 run_internal_id = 56, 
                                 run_external_id = 56, 
-                                beamtime = openapi_client.models.json_beamtime.JsonBeamtime(
+                                beamtime = amarcord_open.models.json_beamtime.JsonBeamtime(
                                     id = 56, 
                                     external_id = '', 
                                     proposal = '', 
@@ -181,7 +181,7 @@ class TestJsonReadMergeResultsOutput(unittest.TestCase):
                                     ], )
                             ], 
                         files_from_indexing = [
-                            openapi_client.models.json_file_output.JsonFileOutput(
+                            amarcord_open.models.json_file_output.JsonFileOutput(
                                 id = 56, 
                                 description = '', 
                                 type_ = '', 

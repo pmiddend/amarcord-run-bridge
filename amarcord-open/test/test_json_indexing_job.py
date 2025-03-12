@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_indexing_job import JsonIndexingJob
+from amarcord_open.models.json_indexing_job import JsonIndexingJob
 
 class TestJsonIndexingJob(unittest.TestCase):
     """JsonIndexingJob unit test stubs"""
@@ -49,7 +49,7 @@ class TestJsonIndexingJob(unittest.TestCase):
                 command_line = '',
                 run_internal_id = 56,
                 run_external_id = 56,
-                beamtime = openapi_client.models.json_beamtime.JsonBeamtime(
+                beamtime = amarcord_open.models.json_beamtime.JsonBeamtime(
                     id = 56, 
                     external_id = '', 
                     proposal = '', 
@@ -77,7 +77,7 @@ class TestJsonIndexingJob(unittest.TestCase):
                 command_line = '',
                 run_internal_id = 56,
                 run_external_id = 56,
-                beamtime = openapi_client.models.json_beamtime.JsonBeamtime(
+                beamtime = amarcord_open.models.json_beamtime.JsonBeamtime(
                     id = 56, 
                     external_id = '', 
                     proposal = '', 

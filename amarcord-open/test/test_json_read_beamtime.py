@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_read_beamtime import JsonReadBeamtime
+from amarcord_open.models.json_read_beamtime import JsonReadBeamtime
 
 class TestJsonReadBeamtime(unittest.TestCase):
     """JsonReadBeamtime unit test stubs"""
@@ -36,7 +36,7 @@ class TestJsonReadBeamtime(unittest.TestCase):
         if include_optional:
             return JsonReadBeamtime(
                 beamtimes = [
-                    openapi_client.models.json_beamtime.JsonBeamtime(
+                    amarcord_open.models.json_beamtime.JsonBeamtime(
                         id = 56, 
                         external_id = '', 
                         proposal = '', 
@@ -54,7 +54,7 @@ class TestJsonReadBeamtime(unittest.TestCase):
         else:
             return JsonReadBeamtime(
                 beamtimes = [
-                    openapi_client.models.json_beamtime.JsonBeamtime(
+                    amarcord_open.models.json_beamtime.JsonBeamtime(
                         id = 56, 
                         external_id = '', 
                         proposal = '', 

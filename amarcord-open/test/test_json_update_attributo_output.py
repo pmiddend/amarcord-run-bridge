@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_update_attributo_output import JsonUpdateAttributoOutput
+from amarcord_open.models.json_update_attributo_output import JsonUpdateAttributoOutput
 
 class TestJsonUpdateAttributoOutput(unittest.TestCase):
     """JsonUpdateAttributoOutput unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.api.merging_api import MergingApi
+from amarcord_open.api.merging_api import MergingApi
 
 
 class TestMergingApi(unittest.IsolatedAsyncioTestCase):
@@ -24,7 +24,7 @@ class TestMergingApi(unittest.IsolatedAsyncioTestCase):
         self.api = MergingApi()
 
     async def asyncTearDown(self) -> None:
-        pass
+        await self.api.api_client.close()
 
     async def test_merge_job_finished_api_merging_merge_result_id_finish_post(self) -> None:
         """Test case for merge_job_finished_api_merging_merge_result_id_finish_post

@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_run_range import JsonRunRange
+from amarcord_open.models.json_run_range import JsonRunRange
 
 class TestJsonRunRange(unittest.TestCase):
     """JsonRunRange unit test stubs"""

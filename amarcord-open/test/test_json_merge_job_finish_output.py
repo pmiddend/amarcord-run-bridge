@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_merge_job_finish_output import JsonMergeJobFinishOutput
+from amarcord_open.models.json_merge_job_finish_output import JsonMergeJobFinishOutput
 
 class TestJsonMergeJobFinishOutput(unittest.TestCase):
     """JsonMergeJobFinishOutput unit test stubs"""

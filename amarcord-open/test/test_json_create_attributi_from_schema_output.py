@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_create_attributi_from_schema_output import JsonCreateAttributiFromSchemaOutput
+from amarcord_open.models.json_create_attributi_from_schema_output import JsonCreateAttributiFromSchemaOutput
 
 class TestJsonCreateAttributiFromSchemaOutput(unittest.TestCase):
     """JsonCreateAttributiFromSchemaOutput unit test stubs"""

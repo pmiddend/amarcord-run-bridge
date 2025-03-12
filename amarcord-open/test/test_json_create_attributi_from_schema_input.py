@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_create_attributi_from_schema_input import JsonCreateAttributiFromSchemaInput
+from amarcord_open.models.json_create_attributi_from_schema_input import JsonCreateAttributiFromSchemaInput
 
 class TestJsonCreateAttributiFromSchemaInput(unittest.TestCase):
     """JsonCreateAttributiFromSchemaInput unit test stubs"""
@@ -36,7 +36,7 @@ class TestJsonCreateAttributiFromSchemaInput(unittest.TestCase):
         if include_optional:
             return JsonCreateAttributiFromSchemaInput(
                 attributi_schema = [
-                    openapi_client.models.json_create_attributi_from_schema_single_attributo.JsonCreateAttributiFromSchemaSingleAttributo(
+                    amarcord_open.models.json_create_attributi_from_schema_single_attributo.JsonCreateAttributiFromSchemaSingleAttributo(
                         attributo_name = '', 
                         attributo_type = null, 
                         description = '', )
@@ -46,7 +46,7 @@ class TestJsonCreateAttributiFromSchemaInput(unittest.TestCase):
         else:
             return JsonCreateAttributiFromSchemaInput(
                 attributi_schema = [
-                    openapi_client.models.json_create_attributi_from_schema_single_attributo.JsonCreateAttributiFromSchemaSingleAttributo(
+                    amarcord_open.models.json_create_attributi_from_schema_single_attributo.JsonCreateAttributiFromSchemaSingleAttributo(
                         attributo_name = '', 
                         attributo_type = null, 
                         description = '', )

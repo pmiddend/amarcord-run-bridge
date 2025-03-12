@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_beamtime_output import JsonBeamtimeOutput
+from amarcord_open.models.json_beamtime_output import JsonBeamtimeOutput
 
 class TestJsonBeamtimeOutput(unittest.TestCase):
     """JsonBeamtimeOutput unit test stubs"""

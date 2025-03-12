@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.api.attributi_api import AttributiApi
+from amarcord_open.api.attributi_api import AttributiApi
 
 
 class TestAttributiApi(unittest.IsolatedAsyncioTestCase):
@@ -24,7 +24,7 @@ class TestAttributiApi(unittest.IsolatedAsyncioTestCase):
         self.api = AttributiApi()
 
     async def asyncTearDown(self) -> None:
-        pass
+        await self.api.api_client.close()
 
     async def test_create_attributi_from_schema_api_attributi_schema_post(self) -> None:
         """Test case for create_attributi_from_schema_api_attributi_schema_post

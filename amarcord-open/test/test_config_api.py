@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.api.config_api import ConfigApi
+from amarcord_open.api.config_api import ConfigApi
 
 
 class TestConfigApi(unittest.IsolatedAsyncioTestCase):
@@ -24,7 +24,7 @@ class TestConfigApi(unittest.IsolatedAsyncioTestCase):
         self.api = ConfigApi()
 
     async def asyncTearDown(self) -> None:
-        pass
+        await self.api.api_client.close()
 
     async def test_read_indexing_parameters_api_user_config_beamtime_id_online_indexing_parameters_get(self) -> None:
         """Test case for read_indexing_parameters_api_user_config_beamtime_id_online_indexing_parameters_get

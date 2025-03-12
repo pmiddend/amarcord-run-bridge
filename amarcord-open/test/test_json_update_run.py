@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_update_run import JsonUpdateRun
+from amarcord_open.models.json_update_run import JsonUpdateRun
 
 class TestJsonUpdateRun(unittest.TestCase):
     """JsonUpdateRun unit test stubs"""
@@ -38,7 +38,7 @@ class TestJsonUpdateRun(unittest.TestCase):
                 id = 56,
                 experiment_type_id = 56,
                 attributi = [
-                    openapi_client.models.json_attributo_value.JsonAttributoValue(
+                    amarcord_open.models.json_attributo_value.JsonAttributoValue(
                         attributo_id = 56, 
                         attributo_value_str = '', 
                         attributo_value_int = 56, 
@@ -57,7 +57,7 @@ class TestJsonUpdateRun(unittest.TestCase):
                             ], )
                     ],
                 files = [
-                    openapi_client.models.json_run_file.JsonRunFile(
+                    amarcord_open.models.json_run_file.JsonRunFile(
                         id = 56, 
                         glob = '', 
                         source = '', )
@@ -68,7 +68,7 @@ class TestJsonUpdateRun(unittest.TestCase):
                 id = 56,
                 experiment_type_id = 56,
                 attributi = [
-                    openapi_client.models.json_attributo_value.JsonAttributoValue(
+                    amarcord_open.models.json_attributo_value.JsonAttributoValue(
                         attributo_id = 56, 
                         attributo_value_str = '', 
                         attributo_value_int = 56, 

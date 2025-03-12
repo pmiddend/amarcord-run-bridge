@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_update_online_indexing_parameters_output import JsonUpdateOnlineIndexingParametersOutput
+from amarcord_open.models.json_update_online_indexing_parameters_output import JsonUpdateOnlineIndexingParametersOutput
 
 class TestJsonUpdateOnlineIndexingParametersOutput(unittest.TestCase):
     """JsonUpdateOnlineIndexingParametersOutput unit test stubs"""

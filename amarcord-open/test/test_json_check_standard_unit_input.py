@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_check_standard_unit_input import JsonCheckStandardUnitInput
+from amarcord_open.models.json_check_standard_unit_input import JsonCheckStandardUnitInput
 
 class TestJsonCheckStandardUnitInput(unittest.TestCase):
     """JsonCheckStandardUnitInput unit test stubs"""

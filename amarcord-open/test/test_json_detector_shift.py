@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_detector_shift import JsonDetectorShift
+from amarcord_open.models.json_detector_shift import JsonDetectorShift
 
 class TestJsonDetectorShift(unittest.TestCase):
     """JsonDetectorShift unit test stubs"""

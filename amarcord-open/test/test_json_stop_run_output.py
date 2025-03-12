@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_stop_run_output import JsonStopRunOutput
+from amarcord_open.models.json_stop_run_output import JsonStopRunOutput
 
 class TestJsonStopRunOutput(unittest.TestCase):
     """JsonStopRunOutput unit test stubs"""

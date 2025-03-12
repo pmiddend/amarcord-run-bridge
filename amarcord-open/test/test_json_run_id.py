@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_run_id import JsonRunId
+from amarcord_open.models.json_run_id import JsonRunId
 
 class TestJsonRunId(unittest.TestCase):
     """JsonRunId unit test stubs"""

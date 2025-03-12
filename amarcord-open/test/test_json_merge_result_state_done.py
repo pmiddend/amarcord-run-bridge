@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_merge_result_state_done import JsonMergeResultStateDone
+from amarcord_open.models.json_merge_result_state_done import JsonMergeResultStateDone
 
 class TestJsonMergeResultStateDone(unittest.TestCase):
     """JsonMergeResultStateDone unit test stubs"""
@@ -37,9 +37,9 @@ class TestJsonMergeResultStateDone(unittest.TestCase):
             return JsonMergeResultStateDone(
                 started = 56,
                 stopped = 56,
-                result = openapi_client.models.json_merge_result_internal.JsonMergeResultInternal(
+                result = amarcord_open.models.json_merge_result_internal.JsonMergeResultInternal(
                     mtz_file_id = 56, 
-                    fom = openapi_client.models.json_merge_result_fom.JsonMergeResultFom(
+                    fom = amarcord_open.models.json_merge_result_fom.JsonMergeResultFom(
                         snr = 1.337, 
                         wilson = 1.337, 
                         ln_k = 1.337, 
@@ -62,7 +62,7 @@ class TestJsonMergeResultStateDone(unittest.TestCase):
                         rano_over_r_split = 1.337, 
                         d1sig = 1.337, 
                         d2sig = 1.337, 
-                        outer_shell = openapi_client.models.json_merge_result_outer_shell.JsonMergeResultOuterShell(
+                        outer_shell = amarcord_open.models.json_merge_result_outer_shell.JsonMergeResultOuterShell(
                             resolution = 1.337, 
                             ccstar = 1.337, 
                             r_split = 1.337, 
@@ -75,7 +75,7 @@ class TestJsonMergeResultStateDone(unittest.TestCase):
                             max_res = 1.337, ), ), 
                     ambigator_fg_graph_file_id = 56, 
                     detailed_foms = [
-                        openapi_client.models.json_merge_result_shell.JsonMergeResultShell(
+                        amarcord_open.models.json_merge_result_shell.JsonMergeResultShell(
                             one_over_d_centre = 1.337, 
                             nref = 56, 
                             d_over_a = 1.337, 
@@ -92,7 +92,7 @@ class TestJsonMergeResultStateDone(unittest.TestCase):
                             mean_i = 1.337, )
                         ], 
                     refinement_results = [
-                        openapi_client.models.json_refinement_result_internal.JsonRefinementResultInternal(
+                        amarcord_open.models.json_refinement_result_internal.JsonRefinementResultInternal(
                             id = 56, 
                             pdb_file_id = 56, 
                             mtz_file_id = 56, 
@@ -106,9 +106,9 @@ class TestJsonMergeResultStateDone(unittest.TestCase):
             return JsonMergeResultStateDone(
                 started = 56,
                 stopped = 56,
-                result = openapi_client.models.json_merge_result_internal.JsonMergeResultInternal(
+                result = amarcord_open.models.json_merge_result_internal.JsonMergeResultInternal(
                     mtz_file_id = 56, 
-                    fom = openapi_client.models.json_merge_result_fom.JsonMergeResultFom(
+                    fom = amarcord_open.models.json_merge_result_fom.JsonMergeResultFom(
                         snr = 1.337, 
                         wilson = 1.337, 
                         ln_k = 1.337, 
@@ -131,7 +131,7 @@ class TestJsonMergeResultStateDone(unittest.TestCase):
                         rano_over_r_split = 1.337, 
                         d1sig = 1.337, 
                         d2sig = 1.337, 
-                        outer_shell = openapi_client.models.json_merge_result_outer_shell.JsonMergeResultOuterShell(
+                        outer_shell = amarcord_open.models.json_merge_result_outer_shell.JsonMergeResultOuterShell(
                             resolution = 1.337, 
                             ccstar = 1.337, 
                             r_split = 1.337, 
@@ -144,7 +144,7 @@ class TestJsonMergeResultStateDone(unittest.TestCase):
                             max_res = 1.337, ), ), 
                     ambigator_fg_graph_file_id = 56, 
                     detailed_foms = [
-                        openapi_client.models.json_merge_result_shell.JsonMergeResultShell(
+                        amarcord_open.models.json_merge_result_shell.JsonMergeResultShell(
                             one_over_d_centre = 1.337, 
                             nref = 56, 
                             d_over_a = 1.337, 
@@ -161,7 +161,7 @@ class TestJsonMergeResultStateDone(unittest.TestCase):
                             mean_i = 1.337, )
                         ], 
                     refinement_results = [
-                        openapi_client.models.json_refinement_result_internal.JsonRefinementResultInternal(
+                        amarcord_open.models.json_refinement_result_internal.JsonRefinementResultInternal(
                             id = 56, 
                             pdb_file_id = 56, 
                             mtz_file_id = 56, 

@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_attributo_value import JsonAttributoValue
+from amarcord_open.models.json_attributo_value import JsonAttributoValue
 
 class TestJsonAttributoValue(unittest.TestCase):
     """JsonAttributoValue unit test stubs"""

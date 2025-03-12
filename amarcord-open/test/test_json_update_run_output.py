@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_update_run_output import JsonUpdateRunOutput
+from amarcord_open.models.json_update_run_output import JsonUpdateRunOutput
 
 class TestJsonUpdateRunOutput(unittest.TestCase):
     """JsonUpdateRunOutput unit test stubs"""
@@ -37,7 +37,7 @@ class TestJsonUpdateRunOutput(unittest.TestCase):
             return JsonUpdateRunOutput(
                 result = True,
                 files = [
-                    openapi_client.models.json_run_file.JsonRunFile(
+                    amarcord_open.models.json_run_file.JsonRunFile(
                         id = 56, 
                         glob = '', 
                         source = '', )
@@ -47,7 +47,7 @@ class TestJsonUpdateRunOutput(unittest.TestCase):
             return JsonUpdateRunOutput(
                 result = True,
                 files = [
-                    openapi_client.models.json_run_file.JsonRunFile(
+                    amarcord_open.models.json_run_file.JsonRunFile(
                         id = 56, 
                         glob = '', 
                         source = '', )

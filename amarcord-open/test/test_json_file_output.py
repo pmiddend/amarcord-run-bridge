@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_file_output import JsonFileOutput
+from amarcord_open.models.json_file_output import JsonFileOutput
 
 class TestJsonFileOutput(unittest.TestCase):
     """JsonFileOutput unit test stubs"""

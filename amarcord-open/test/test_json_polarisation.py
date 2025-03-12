@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_polarisation import JsonPolarisation
+from amarcord_open.models.json_polarisation import JsonPolarisation
 
 class TestJsonPolarisation(unittest.TestCase):
     """JsonPolarisation unit test stubs"""

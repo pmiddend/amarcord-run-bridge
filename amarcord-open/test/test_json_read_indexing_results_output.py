@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_read_indexing_results_output import JsonReadIndexingResultsOutput
+from amarcord_open.models.json_read_indexing_results_output import JsonReadIndexingResultsOutput
 
 class TestJsonReadIndexingResultsOutput(unittest.TestCase):
     """JsonReadIndexingResultsOutput unit test stubs"""
@@ -36,7 +36,7 @@ class TestJsonReadIndexingResultsOutput(unittest.TestCase):
         if include_optional:
             return JsonReadIndexingResultsOutput(
                 indexing_jobs = [
-                    openapi_client.models.json_indexing_job.JsonIndexingJob(
+                    amarcord_open.models.json_indexing_job.JsonIndexingJob(
                         id = 56, 
                         job_id = 56, 
                         job_status = 'queued', 
@@ -51,7 +51,7 @@ class TestJsonReadIndexingResultsOutput(unittest.TestCase):
                         command_line = '', 
                         run_internal_id = 56, 
                         run_external_id = 56, 
-                        beamtime = openapi_client.models.json_beamtime.JsonBeamtime(
+                        beamtime = amarcord_open.models.json_beamtime.JsonBeamtime(
                             id = 56, 
                             external_id = '', 
                             proposal = '', 
@@ -72,7 +72,7 @@ class TestJsonReadIndexingResultsOutput(unittest.TestCase):
         else:
             return JsonReadIndexingResultsOutput(
                 indexing_jobs = [
-                    openapi_client.models.json_indexing_job.JsonIndexingJob(
+                    amarcord_open.models.json_indexing_job.JsonIndexingJob(
                         id = 56, 
                         job_id = 56, 
                         job_status = 'queued', 
@@ -87,7 +87,7 @@ class TestJsonReadIndexingResultsOutput(unittest.TestCase):
                         command_line = '', 
                         run_internal_id = 56, 
                         run_external_id = 56, 
-                        beamtime = openapi_client.models.json_beamtime.JsonBeamtime(
+                        beamtime = amarcord_open.models.json_beamtime.JsonBeamtime(
                             id = 56, 
                             external_id = '', 
                             proposal = '', 

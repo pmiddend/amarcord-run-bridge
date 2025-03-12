@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.api.beamtimes_api import BeamtimesApi
+from amarcord_open.api.beamtimes_api import BeamtimesApi
 
 
 class TestBeamtimesApi(unittest.IsolatedAsyncioTestCase):
@@ -24,7 +24,7 @@ class TestBeamtimesApi(unittest.IsolatedAsyncioTestCase):
         self.api = BeamtimesApi()
 
     async def asyncTearDown(self) -> None:
-        pass
+        await self.api.api_client.close()
 
     async def test_create_beamtime_api_beamtimes_post(self) -> None:
         """Test case for create_beamtime_api_beamtimes_post

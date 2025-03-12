@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_indexing_result_still_running import JsonIndexingResultStillRunning
+from amarcord_open.models.json_indexing_result_still_running import JsonIndexingResultStillRunning
 
 class TestJsonIndexingResultStillRunning(unittest.TestCase):
     """JsonIndexingResultStillRunning unit test stubs"""

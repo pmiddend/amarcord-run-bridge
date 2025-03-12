@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.api.schedule_api import ScheduleApi
+from amarcord_open.api.schedule_api import ScheduleApi
 
 
 class TestScheduleApi(unittest.IsolatedAsyncioTestCase):
@@ -24,7 +24,7 @@ class TestScheduleApi(unittest.IsolatedAsyncioTestCase):
         self.api = ScheduleApi()
 
     async def asyncTearDown(self) -> None:
-        pass
+        await self.api.api_client.close()
 
     async def test_get_beamtime_schedule_api_schedule_beamtime_id_get(self) -> None:
         """Test case for get_beamtime_schedule_api_schedule_beamtime_id_get

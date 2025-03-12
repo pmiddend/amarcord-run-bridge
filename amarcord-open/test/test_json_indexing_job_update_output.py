@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_indexing_job_update_output import JsonIndexingJobUpdateOutput
+from amarcord_open.models.json_indexing_job_update_output import JsonIndexingJobUpdateOutput
 
 class TestJsonIndexingJobUpdateOutput(unittest.TestCase):
     """JsonIndexingJobUpdateOutput unit test stubs"""

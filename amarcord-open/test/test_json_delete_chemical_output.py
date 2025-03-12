@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_delete_chemical_output import JsonDeleteChemicalOutput
+from amarcord_open.models.json_delete_chemical_output import JsonDeleteChemicalOutput
 
 class TestJsonDeleteChemicalOutput(unittest.TestCase):
     """JsonDeleteChemicalOutput unit test stubs"""

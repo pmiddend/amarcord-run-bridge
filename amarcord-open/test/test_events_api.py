@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.api.events_api import EventsApi
+from amarcord_open.api.events_api import EventsApi
 
 
 class TestEventsApi(unittest.IsolatedAsyncioTestCase):
@@ -24,7 +24,7 @@ class TestEventsApi(unittest.IsolatedAsyncioTestCase):
         self.api = EventsApi()
 
     async def asyncTearDown(self) -> None:
-        pass
+        await self.api.api_client.close()
 
     async def test_create_event_api_events_post(self) -> None:
         """Test case for create_event_api_events_post

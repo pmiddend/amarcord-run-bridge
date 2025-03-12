@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_read_single_data_set_results import JsonReadSingleDataSetResults
+from amarcord_open.models.json_read_single_data_set_results import JsonReadSingleDataSetResults
 
 class TestJsonReadSingleDataSetResults(unittest.TestCase):
     """JsonReadSingleDataSetResults unit test stubs"""
@@ -36,16 +36,16 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
         if include_optional:
             return JsonReadSingleDataSetResults(
                 attributi = [
-                    openapi_client.models.json_attributo.JsonAttributo(
+                    amarcord_open.models.json_attributo.JsonAttributo(
                         id = 56, 
                         name = '', 
                         description = '', 
                         group = '', 
                         associated_table = 'run', 
-                        attributo_type_integer = openapi_client.models.json_schema_integer.JSONSchemaInteger(
+                        attributo_type_integer = amarcord_open.models.json_schema_integer.JSONSchemaInteger(
                             type = 'integer', 
                             format = 'date-time', ), 
-                        attributo_type_number = openapi_client.models.json_schema_number.JSONSchemaNumber(
+                        attributo_type_number = amarcord_open.models.json_schema_number.JSONSchemaNumber(
                             type = 'number', 
                             minimum = 1.337, 
                             maximum = 1.337, 
@@ -55,39 +55,39 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                             format = 'standard-unit', 
                             tolerance = 1.337, 
                             tolerance_is_absolute = True, ), 
-                        attributo_type_string = openapi_client.models.json_schema_string.JSONSchemaString(
+                        attributo_type_string = amarcord_open.models.json_schema_string.JSONSchemaString(
                             type = 'string', 
                             enum = [
                                 ''
                                 ], ), 
-                        attributo_type_array = openapi_client.models.json_schema_array.JSONSchemaArray(
+                        attributo_type_array = amarcord_open.models.json_schema_array.JSONSchemaArray(
                             type = 'array', 
                             item_type = 'string', 
                             min_items = 56, 
                             max_items = 56, ), 
-                        attributo_type_boolean = openapi_client.models.json_schema_boolean.JSONSchemaBoolean(
+                        attributo_type_boolean = amarcord_open.models.json_schema_boolean.JSONSchemaBoolean(
                             type = 'boolean', ), )
                     ],
                 chemical_id_to_name = [
-                    openapi_client.models.json_chemical_id_and_name.JsonChemicalIdAndName(
+                    amarcord_open.models.json_chemical_id_and_name.JsonChemicalIdAndName(
                         chemical_id = 56, 
                         name = '', )
                     ],
-                experiment_type = openapi_client.models.json_experiment_type.JsonExperimentType(
+                experiment_type = amarcord_open.models.json_experiment_type.JsonExperimentType(
                     id = 56, 
                     name = '', 
                     attributi = [
-                        openapi_client.models.json_attributi_id_and_role.JsonAttributiIdAndRole(
+                        amarcord_open.models.json_attributi_id_and_role.JsonAttributiIdAndRole(
                             id = 56, 
                             role = 'crystal', )
                         ], ),
-                data_set = openapi_client.models.json_data_set_with_indexing_results.JsonDataSetWithIndexingResults(
-                    data_set = openapi_client.models.json_data_set.JsonDataSet(
+                data_set = amarcord_open.models.json_data_set_with_indexing_results.JsonDataSetWithIndexingResults(
+                    data_set = amarcord_open.models.json_data_set.JsonDataSet(
                         id = 56, 
                         experiment_type_id = 56, 
                         beamtime_id = 56, 
                         attributi = [
-                            openapi_client.models.json_attributo_value.JsonAttributoValue(
+                            amarcord_open.models.json_attributo_value.JsonAttributoValue(
                                 attributo_id = 56, 
                                 attributo_value_str = '', 
                                 attributo_value_int = 56, 
@@ -109,7 +109,7 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                         56
                         ], 
                     runs = [
-                        openapi_client.models.json_run_range.JsonRunRange(
+                        amarcord_open.models.json_run_range.JsonRunRange(
                             run_from = 56, 
                             run_to = 56, )
                         ], 
@@ -117,20 +117,20 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                     space_group = '', 
                     cell_description = '', 
                     indexing_results = [
-                        openapi_client.models.json_indexing_parameters_with_results.JsonIndexingParametersWithResults(
-                            parameters = openapi_client.models.json_indexing_parameters.JsonIndexingParameters(
+                        amarcord_open.models.json_indexing_parameters_with_results.JsonIndexingParametersWithResults(
+                            parameters = amarcord_open.models.json_indexing_parameters.JsonIndexingParameters(
                                 id = 56, 
                                 cell_description = '', 
                                 is_online = True, 
                                 command_line = '', 
                                 geometry_file = '', ), 
                             indexing_results = [
-                                openapi_client.models.json_indexing_result.JsonIndexingResult(
+                                amarcord_open.models.json_indexing_result.JsonIndexingResult(
                                     id = 56, 
                                     created = 56, 
                                     started = 56, 
                                     stopped = 56, 
-                                    parameters = openapi_client.models.json_indexing_parameters.JsonIndexingParameters(
+                                    parameters = amarcord_open.models.json_indexing_parameters.JsonIndexingParameters(
                                         id = 56, 
                                         cell_description = '', 
                                         is_online = True, 
@@ -153,7 +153,7 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                                     has_error = True, )
                                 ], 
                             merge_results = [
-                                openapi_client.models.json_merge_result.JsonMergeResult(
+                                amarcord_open.models.json_merge_result.JsonMergeResult(
                                     id = 56, 
                                     created = 56, 
                                     runs = [
@@ -162,23 +162,23 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                                     indexing_result_ids = [
                                         56
                                         ], 
-                                    state_queued = openapi_client.models.json_merge_result_state_queued.JsonMergeResultStateQueued(
+                                    state_queued = amarcord_open.models.json_merge_result_state_queued.JsonMergeResultStateQueued(
                                         queued = True, ), 
-                                    state_error = openapi_client.models.json_merge_result_state_error.JsonMergeResultStateError(
+                                    state_error = amarcord_open.models.json_merge_result_state_error.JsonMergeResultStateError(
                                         started = 56, 
                                         stopped = 56, 
                                         error = '', 
                                         latest_log = '', ), 
-                                    state_running = openapi_client.models.json_merge_result_state_running.JsonMergeResultStateRunning(
+                                    state_running = amarcord_open.models.json_merge_result_state_running.JsonMergeResultStateRunning(
                                         started = 56, 
                                         job_id = 56, 
                                         latest_log = '', ), 
-                                    state_done = openapi_client.models.json_merge_result_state_done.JsonMergeResultStateDone(
+                                    state_done = amarcord_open.models.json_merge_result_state_done.JsonMergeResultStateDone(
                                         started = 56, 
                                         stopped = 56, 
-                                        result = openapi_client.models.json_merge_result_internal.JsonMergeResultInternal(
+                                        result = amarcord_open.models.json_merge_result_internal.JsonMergeResultInternal(
                                             mtz_file_id = 56, 
-                                            fom = openapi_client.models.json_merge_result_fom.JsonMergeResultFom(
+                                            fom = amarcord_open.models.json_merge_result_fom.JsonMergeResultFom(
                                                 snr = 1.337, 
                                                 wilson = 1.337, 
                                                 ln_k = 1.337, 
@@ -201,7 +201,7 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                                                 rano_over_r_split = 1.337, 
                                                 d1sig = 1.337, 
                                                 d2sig = 1.337, 
-                                                outer_shell = openapi_client.models.json_merge_result_outer_shell.JsonMergeResultOuterShell(
+                                                outer_shell = amarcord_open.models.json_merge_result_outer_shell.JsonMergeResultOuterShell(
                                                     resolution = 1.337, 
                                                     ccstar = 1.337, 
                                                     r_split = 1.337, 
@@ -214,7 +214,7 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                                                     max_res = 1.337, ), ), 
                                             ambigator_fg_graph_file_id = 56, 
                                             detailed_foms = [
-                                                openapi_client.models.json_merge_result_shell.JsonMergeResultShell(
+                                                amarcord_open.models.json_merge_result_shell.JsonMergeResultShell(
                                                     one_over_d_centre = 1.337, 
                                                     nref = 56, 
                                                     d_over_a = 1.337, 
@@ -231,7 +231,7 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                                                     mean_i = 1.337, )
                                                 ], 
                                             refinement_results = [
-                                                openapi_client.models.json_refinement_result_internal.JsonRefinementResultInternal(
+                                                amarcord_open.models.json_refinement_result_internal.JsonRefinementResultInternal(
                                                     id = 56, 
                                                     pdb_file_id = 56, 
                                                     mtz_file_id = 56, 
@@ -240,7 +240,7 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                                                     rms_bond_angle = 1.337, 
                                                     rms_bond_length = 1.337, )
                                                 ], ), ), 
-                                    parameters = openapi_client.models.json_merge_parameters.JsonMergeParameters(
+                                    parameters = amarcord_open.models.json_merge_parameters.JsonMergeParameters(
                                         point_group = '', 
                                         space_group = '', 
                                         cell_description = '', 
@@ -249,7 +249,7 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                                         scale_intensities = 'off', 
                                         post_refinement = True, 
                                         iterations = 56, 
-                                        polarisation = openapi_client.models.json_polarisation.JsonPolarisation(
+                                        polarisation = amarcord_open.models.json_polarisation.JsonPolarisation(
                                             angle = 56, 
                                             percent = 56, ), 
                                         start_after = 56, 
@@ -268,7 +268,7 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                                         w = '', 
                                         ambigator_command_line = '', ), 
                                     refinement_results = [
-                                        openapi_client.models.json_refinement_result.JsonRefinementResult(
+                                        amarcord_open.models.json_refinement_result.JsonRefinementResult(
                                             id = 56, 
                                             merge_result_id = 56, 
                                             pdb_file_id = 56, 
@@ -284,16 +284,16 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
         else:
             return JsonReadSingleDataSetResults(
                 attributi = [
-                    openapi_client.models.json_attributo.JsonAttributo(
+                    amarcord_open.models.json_attributo.JsonAttributo(
                         id = 56, 
                         name = '', 
                         description = '', 
                         group = '', 
                         associated_table = 'run', 
-                        attributo_type_integer = openapi_client.models.json_schema_integer.JSONSchemaInteger(
+                        attributo_type_integer = amarcord_open.models.json_schema_integer.JSONSchemaInteger(
                             type = 'integer', 
                             format = 'date-time', ), 
-                        attributo_type_number = openapi_client.models.json_schema_number.JSONSchemaNumber(
+                        attributo_type_number = amarcord_open.models.json_schema_number.JSONSchemaNumber(
                             type = 'number', 
                             minimum = 1.337, 
                             maximum = 1.337, 
@@ -303,39 +303,39 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                             format = 'standard-unit', 
                             tolerance = 1.337, 
                             tolerance_is_absolute = True, ), 
-                        attributo_type_string = openapi_client.models.json_schema_string.JSONSchemaString(
+                        attributo_type_string = amarcord_open.models.json_schema_string.JSONSchemaString(
                             type = 'string', 
                             enum = [
                                 ''
                                 ], ), 
-                        attributo_type_array = openapi_client.models.json_schema_array.JSONSchemaArray(
+                        attributo_type_array = amarcord_open.models.json_schema_array.JSONSchemaArray(
                             type = 'array', 
                             item_type = 'string', 
                             min_items = 56, 
                             max_items = 56, ), 
-                        attributo_type_boolean = openapi_client.models.json_schema_boolean.JSONSchemaBoolean(
+                        attributo_type_boolean = amarcord_open.models.json_schema_boolean.JSONSchemaBoolean(
                             type = 'boolean', ), )
                     ],
                 chemical_id_to_name = [
-                    openapi_client.models.json_chemical_id_and_name.JsonChemicalIdAndName(
+                    amarcord_open.models.json_chemical_id_and_name.JsonChemicalIdAndName(
                         chemical_id = 56, 
                         name = '', )
                     ],
-                experiment_type = openapi_client.models.json_experiment_type.JsonExperimentType(
+                experiment_type = amarcord_open.models.json_experiment_type.JsonExperimentType(
                     id = 56, 
                     name = '', 
                     attributi = [
-                        openapi_client.models.json_attributi_id_and_role.JsonAttributiIdAndRole(
+                        amarcord_open.models.json_attributi_id_and_role.JsonAttributiIdAndRole(
                             id = 56, 
                             role = 'crystal', )
                         ], ),
-                data_set = openapi_client.models.json_data_set_with_indexing_results.JsonDataSetWithIndexingResults(
-                    data_set = openapi_client.models.json_data_set.JsonDataSet(
+                data_set = amarcord_open.models.json_data_set_with_indexing_results.JsonDataSetWithIndexingResults(
+                    data_set = amarcord_open.models.json_data_set.JsonDataSet(
                         id = 56, 
                         experiment_type_id = 56, 
                         beamtime_id = 56, 
                         attributi = [
-                            openapi_client.models.json_attributo_value.JsonAttributoValue(
+                            amarcord_open.models.json_attributo_value.JsonAttributoValue(
                                 attributo_id = 56, 
                                 attributo_value_str = '', 
                                 attributo_value_int = 56, 
@@ -357,7 +357,7 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                         56
                         ], 
                     runs = [
-                        openapi_client.models.json_run_range.JsonRunRange(
+                        amarcord_open.models.json_run_range.JsonRunRange(
                             run_from = 56, 
                             run_to = 56, )
                         ], 
@@ -365,20 +365,20 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                     space_group = '', 
                     cell_description = '', 
                     indexing_results = [
-                        openapi_client.models.json_indexing_parameters_with_results.JsonIndexingParametersWithResults(
-                            parameters = openapi_client.models.json_indexing_parameters.JsonIndexingParameters(
+                        amarcord_open.models.json_indexing_parameters_with_results.JsonIndexingParametersWithResults(
+                            parameters = amarcord_open.models.json_indexing_parameters.JsonIndexingParameters(
                                 id = 56, 
                                 cell_description = '', 
                                 is_online = True, 
                                 command_line = '', 
                                 geometry_file = '', ), 
                             indexing_results = [
-                                openapi_client.models.json_indexing_result.JsonIndexingResult(
+                                amarcord_open.models.json_indexing_result.JsonIndexingResult(
                                     id = 56, 
                                     created = 56, 
                                     started = 56, 
                                     stopped = 56, 
-                                    parameters = openapi_client.models.json_indexing_parameters.JsonIndexingParameters(
+                                    parameters = amarcord_open.models.json_indexing_parameters.JsonIndexingParameters(
                                         id = 56, 
                                         cell_description = '', 
                                         is_online = True, 
@@ -401,7 +401,7 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                                     has_error = True, )
                                 ], 
                             merge_results = [
-                                openapi_client.models.json_merge_result.JsonMergeResult(
+                                amarcord_open.models.json_merge_result.JsonMergeResult(
                                     id = 56, 
                                     created = 56, 
                                     runs = [
@@ -410,23 +410,23 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                                     indexing_result_ids = [
                                         56
                                         ], 
-                                    state_queued = openapi_client.models.json_merge_result_state_queued.JsonMergeResultStateQueued(
+                                    state_queued = amarcord_open.models.json_merge_result_state_queued.JsonMergeResultStateQueued(
                                         queued = True, ), 
-                                    state_error = openapi_client.models.json_merge_result_state_error.JsonMergeResultStateError(
+                                    state_error = amarcord_open.models.json_merge_result_state_error.JsonMergeResultStateError(
                                         started = 56, 
                                         stopped = 56, 
                                         error = '', 
                                         latest_log = '', ), 
-                                    state_running = openapi_client.models.json_merge_result_state_running.JsonMergeResultStateRunning(
+                                    state_running = amarcord_open.models.json_merge_result_state_running.JsonMergeResultStateRunning(
                                         started = 56, 
                                         job_id = 56, 
                                         latest_log = '', ), 
-                                    state_done = openapi_client.models.json_merge_result_state_done.JsonMergeResultStateDone(
+                                    state_done = amarcord_open.models.json_merge_result_state_done.JsonMergeResultStateDone(
                                         started = 56, 
                                         stopped = 56, 
-                                        result = openapi_client.models.json_merge_result_internal.JsonMergeResultInternal(
+                                        result = amarcord_open.models.json_merge_result_internal.JsonMergeResultInternal(
                                             mtz_file_id = 56, 
-                                            fom = openapi_client.models.json_merge_result_fom.JsonMergeResultFom(
+                                            fom = amarcord_open.models.json_merge_result_fom.JsonMergeResultFom(
                                                 snr = 1.337, 
                                                 wilson = 1.337, 
                                                 ln_k = 1.337, 
@@ -449,7 +449,7 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                                                 rano_over_r_split = 1.337, 
                                                 d1sig = 1.337, 
                                                 d2sig = 1.337, 
-                                                outer_shell = openapi_client.models.json_merge_result_outer_shell.JsonMergeResultOuterShell(
+                                                outer_shell = amarcord_open.models.json_merge_result_outer_shell.JsonMergeResultOuterShell(
                                                     resolution = 1.337, 
                                                     ccstar = 1.337, 
                                                     r_split = 1.337, 
@@ -462,7 +462,7 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                                                     max_res = 1.337, ), ), 
                                             ambigator_fg_graph_file_id = 56, 
                                             detailed_foms = [
-                                                openapi_client.models.json_merge_result_shell.JsonMergeResultShell(
+                                                amarcord_open.models.json_merge_result_shell.JsonMergeResultShell(
                                                     one_over_d_centre = 1.337, 
                                                     nref = 56, 
                                                     d_over_a = 1.337, 
@@ -479,7 +479,7 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                                                     mean_i = 1.337, )
                                                 ], 
                                             refinement_results = [
-                                                openapi_client.models.json_refinement_result_internal.JsonRefinementResultInternal(
+                                                amarcord_open.models.json_refinement_result_internal.JsonRefinementResultInternal(
                                                     id = 56, 
                                                     pdb_file_id = 56, 
                                                     mtz_file_id = 56, 
@@ -488,7 +488,7 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                                                     rms_bond_angle = 1.337, 
                                                     rms_bond_length = 1.337, )
                                                 ], ), ), 
-                                    parameters = openapi_client.models.json_merge_parameters.JsonMergeParameters(
+                                    parameters = amarcord_open.models.json_merge_parameters.JsonMergeParameters(
                                         point_group = '', 
                                         space_group = '', 
                                         cell_description = '', 
@@ -497,7 +497,7 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                                         scale_intensities = 'off', 
                                         post_refinement = True, 
                                         iterations = 56, 
-                                        polarisation = openapi_client.models.json_polarisation.JsonPolarisation(
+                                        polarisation = amarcord_open.models.json_polarisation.JsonPolarisation(
                                             angle = 56, 
                                             percent = 56, ), 
                                         start_after = 56, 
@@ -516,7 +516,7 @@ class TestJsonReadSingleDataSetResults(unittest.TestCase):
                                         w = '', 
                                         ambigator_command_line = '', ), 
                                     refinement_results = [
-                                        openapi_client.models.json_refinement_result.JsonRefinementResult(
+                                        amarcord_open.models.json_refinement_result.JsonRefinementResult(
                                             id = 56, 
                                             merge_result_id = 56, 
                                             pdb_file_id = 56, 

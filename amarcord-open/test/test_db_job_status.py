@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.db_job_status import DBJobStatus
+from amarcord_open.models.db_job_status import DBJobStatus
 
 class TestDBJobStatus(unittest.TestCase):
     """DBJobStatus unit test stubs"""

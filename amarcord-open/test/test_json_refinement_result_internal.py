@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_refinement_result_internal import JsonRefinementResultInternal
+from amarcord_open.models.json_refinement_result_internal import JsonRefinementResultInternal
 
 class TestJsonRefinementResultInternal(unittest.TestCase):
     """JsonRefinementResultInternal unit test stubs"""

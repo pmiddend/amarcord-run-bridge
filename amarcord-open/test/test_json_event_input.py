@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_event_input import JsonEventInput
+from amarcord_open.models.json_event_input import JsonEventInput
 
 class TestJsonEventInput(unittest.TestCase):
     """JsonEventInput unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_indexing_result_finish_successfully import JsonIndexingResultFinishSuccessfully
+from amarcord_open.models.json_indexing_result_finish_successfully import JsonIndexingResultFinishSuccessfully
 
 class TestJsonIndexingResultFinishSuccessfully(unittest.TestCase):
     """JsonIndexingResultFinishSuccessfully unit test stubs"""

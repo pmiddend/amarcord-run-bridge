@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_chemical_id_and_name import JsonChemicalIdAndName
+from amarcord_open.models.json_chemical_id_and_name import JsonChemicalIdAndName
 
 class TestJsonChemicalIdAndName(unittest.TestCase):
     """JsonChemicalIdAndName unit test stubs"""

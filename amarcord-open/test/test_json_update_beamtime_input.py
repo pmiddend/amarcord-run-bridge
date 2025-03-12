@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_update_beamtime_input import JsonUpdateBeamtimeInput
+from amarcord_open.models.json_update_beamtime_input import JsonUpdateBeamtimeInput
 
 class TestJsonUpdateBeamtimeInput(unittest.TestCase):
     """JsonUpdateBeamtimeInput unit test stubs"""

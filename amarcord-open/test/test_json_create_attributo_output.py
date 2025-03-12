@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_create_attributo_output import JsonCreateAttributoOutput
+from amarcord_open.models.json_create_attributo_output import JsonCreateAttributoOutput
 
 class TestJsonCreateAttributoOutput(unittest.TestCase):
     """JsonCreateAttributoOutput unit test stubs"""

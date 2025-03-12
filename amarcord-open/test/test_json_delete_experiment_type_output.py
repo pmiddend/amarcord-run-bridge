@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_delete_experiment_type_output import JsonDeleteExperimentTypeOutput
+from amarcord_open.models.json_delete_experiment_type_output import JsonDeleteExperimentTypeOutput
 
 class TestJsonDeleteExperimentTypeOutput(unittest.TestCase):
     """JsonDeleteExperimentTypeOutput unit test stubs"""

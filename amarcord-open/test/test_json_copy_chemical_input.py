@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_copy_chemical_input import JsonCopyChemicalInput
+from amarcord_open.models.json_copy_chemical_input import JsonCopyChemicalInput
 
 class TestJsonCopyChemicalInput(unittest.TestCase):
     """JsonCopyChemicalInput unit test stubs"""

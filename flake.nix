@@ -49,7 +49,7 @@
       # See:
       # - https://pyproject-nix.github.io/uv2nix/FAQ.html
       pyprojectOverrides = final: prev: {
-        openapi-client = prev.openapi-client.overrideAttrs (old: {
+        amarcord-open = prev.amarcord-open.overrideAttrs (old: {
           src = ./amarcord-open/.;
         });
       };

@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.api.experimenttypes_api import ExperimenttypesApi
+from amarcord_open.api.experimenttypes_api import ExperimenttypesApi
 
 
 class TestExperimenttypesApi(unittest.IsolatedAsyncioTestCase):
@@ -24,7 +24,7 @@ class TestExperimenttypesApi(unittest.IsolatedAsyncioTestCase):
         self.api = ExperimenttypesApi()
 
     async def asyncTearDown(self) -> None:
-        pass
+        await self.api.api_client.close()
 
     async def test_change_current_run_experiment_type_api_experiment_types_change_for_run_post(self) -> None:
         """Test case for change_current_run_experiment_type_api_experiment_types_change_for_run_post

@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_indexing_statistic import JsonIndexingStatistic
+from amarcord_open.models.json_indexing_statistic import JsonIndexingStatistic
 
 class TestJsonIndexingStatistic(unittest.TestCase):
     """JsonIndexingStatistic unit test stubs"""

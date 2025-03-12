@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.json_queue_merge_job_input import JsonQueueMergeJobInput
+from amarcord_open.models.json_queue_merge_job_input import JsonQueueMergeJobInput
 
 class TestJsonQueueMergeJobInput(unittest.TestCase):
     """JsonQueueMergeJobInput unit test stubs"""
@@ -38,7 +38,7 @@ class TestJsonQueueMergeJobInput(unittest.TestCase):
                 strict_mode = True,
                 indexing_parameters_id = 56,
                 data_set_id = 56,
-                merge_parameters = openapi_client.models.json_merge_parameters.JsonMergeParameters(
+                merge_parameters = amarcord_open.models.json_merge_parameters.JsonMergeParameters(
                     point_group = '', 
                     space_group = '', 
                     cell_description = '', 
@@ -47,7 +47,7 @@ class TestJsonQueueMergeJobInput(unittest.TestCase):
                     scale_intensities = 'off', 
                     post_refinement = True, 
                     iterations = 56, 
-                    polarisation = openapi_client.models.json_polarisation.JsonPolarisation(
+                    polarisation = amarcord_open.models.json_polarisation.JsonPolarisation(
                         angle = 56, 
                         percent = 56, ), 
                     start_after = 56, 
@@ -71,7 +71,7 @@ class TestJsonQueueMergeJobInput(unittest.TestCase):
                 strict_mode = True,
                 indexing_parameters_id = 56,
                 data_set_id = 56,
-                merge_parameters = openapi_client.models.json_merge_parameters.JsonMergeParameters(
+                merge_parameters = amarcord_open.models.json_merge_parameters.JsonMergeParameters(
                     point_group = '', 
                     space_group = '', 
                     cell_description = '', 
@@ -80,7 +80,7 @@ class TestJsonQueueMergeJobInput(unittest.TestCase):
                     scale_intensities = 'off', 
                     post_refinement = True, 
                     iterations = 56, 
-                    polarisation = openapi_client.models.json_polarisation.JsonPolarisation(
+                    polarisation = amarcord_open.models.json_polarisation.JsonPolarisation(
                         angle = 56, 
                         percent = 56, ), 
                     start_after = 56, 
