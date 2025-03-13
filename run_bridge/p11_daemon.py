@@ -241,7 +241,26 @@ async def main_loop(
                 logger.error(f"some state was hot handled, but which one? {state}")
 
 
+async def wait_for_runner(c: Config) -> None:
+    counter = 0
+    while True:
+        counter += 1
+        if counter % 100 == 0:
+            logger.info(f"still waiting for P11 device on {c.p11_runner_url}")
+        try:
+            await DeviceProxy(c.p11_runner_url, green_mode=GreenMode.Asyncio).ping()
+            return
+        except:
+            if counter == 1:
+                logger.info(
+                    f"didn't get P11 device on {c.p11_runner_url}, waiting for it"
+                )
+            await asyncio.sleep(10)
+
+
 async def async_main(c: Config) -> None:
+    await wait_for_runner(c)
+
     config_errors = False
     for a in c.server_config.attributi:
         tango_name = a.input_attribute_name
