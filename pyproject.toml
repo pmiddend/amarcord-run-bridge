@@ -18,6 +18,9 @@ dependencies = [
     "amarcord-open",
 ]
 
+[project.scripts]
+p11-daemon = "run_bridge.p11_daemon:main"
+
 [dependency-groups]
 dev = [
     "pytest>=8.3.5",

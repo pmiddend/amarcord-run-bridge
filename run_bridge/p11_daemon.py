@@ -51,6 +51,7 @@ class TangoRuntimeAttribute:
 
 @dataclass
 class RuntimeConfig:
+    raw_file_path_template: str
     tango_attributes: list[TangoRuntimeAttribute]
     measuring_attribute: TangoRuntimeAttribute
     beamtime_id_attribute: TangoRuntimeAttribute
@@ -124,7 +125,11 @@ async def initialize_runtime_config(c: Config) -> None | RuntimeConfig:
         return None
 
     return RuntimeConfig(
-        attributes, measuring_attribute, beamtime_id_attribute, run_id_attribute
+        c.raw_file_path_template,
+        attributes,
+        measuring_attribute,
+        beamtime_id_attribute,
+        run_id_attribute,
     )
 
 
@@ -209,7 +214,7 @@ async def main_loop(
 
                 run_id = await rc.run_id_attribute.read_value()
                 raw_file_path = (
-                    config.raw_file_path_template.replace(
+                    rc.raw_file_path_template.replace(
                         "%year%", str(datetime.date.today().year)
                     )
                     .replace("%beamtime-internal-id%", str(beamtime_id))
@@ -248,7 +253,9 @@ async def wait_for_runner(c: Config) -> None:
         if counter % 100 == 0:
             logger.info(f"still waiting for P11 device on {c.p11_runner_url}")
         try:
-            await DeviceProxy(c.p11_runner_url, green_mode=GreenMode.Asyncio).ping()
+            dp = DeviceProxy(c.p11_runner_url, green_mode=GreenMode.Asyncio)
+            # this ping method is weird as hell; declared, they way I see it, as a staticmethod, but isn't really static
+            await dp.ping()  # type: ignore
             return
         except:
             if counter == 1:
@@ -303,10 +310,10 @@ async def async_main(c: Config) -> None:
             logger.error("exiting...")
             sys.exit(1)
 
-        username, password = config.server_config.get_user_name_and_password()
+        username, password = c.server_config.get_user_name_and_password()
 
         configuration = Configuration(
-            host=config.server_config.amarcord_url, username=username, password=password
+            host=c.server_config.amarcord_url, username=username, password=password
         )
 
         async with ApiClient(configuration) as api_client:
@@ -316,7 +323,12 @@ async def async_main(c: Config) -> None:
             await main_loop(rc, server_instance, api_client, auth_headers)
 
 
-with Path("config.json").open("r") as f:
-    config = Config(**json.load(f))
+def main() -> None:  # pragma: no cover
+    with Path(sys.argv[1]).open("r", encoding="utf-8") as f:
+        config = Config(**json.load(f))
 
     asyncio.run(async_main(config))
+
+
+if __name__ == "__main__":  # pragma: no cover
+    main()

@@ -1,5 +1,5 @@
 {
-  description = "Flake for TapeDrive runner";
+  description = "AMARCORD Run Bridge";
 
   inputs.nixpkgs.url = "nixpkgs/nixos-unstable";
   inputs.pyproject-nix = {
@@ -85,11 +85,15 @@
               pyprojectOverrides
             ]
           );
+
+      # see
+      # https://pyproject-nix.github.io/uv2nix/patterns/applications.html
+      inherit (pkgs.callPackages pyproject-nix.build.util { }) mkApplication;
     in
     {
       packages.${system} =
         {
-          default = pythonSet.mkVirtualEnv "tapedrive-runner-env" workspace.deps.default;
+          default = pythonSet.mkVirtualEnv "run-bridge-runner-env" workspace.deps.default;
         };
 
       devShells.${system} = {
@@ -126,7 +130,7 @@
             # Build virtual environment, with local packages being editable.
             #
             # Enable all optional dependencies for development.
-            virtualenv = editablePythonSet.mkVirtualEnv "tapedrive-runner-dev-env" workspace.deps.all;
+            virtualenv = editablePythonSet.mkVirtualEnv "run-bridge-dev-env" workspace.deps.all;
 
           in
           pkgs.mkShell {
