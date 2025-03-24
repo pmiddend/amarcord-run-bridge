@@ -15,7 +15,7 @@ dependencies = [
     "structlog==22.3.0",
     "structlog-overtime==1.0.1",
     "pydantic>=2.10.6",
-    "amarcord-open",
+    "amarcord_open",
 ]
 
 [project.scripts]
@@ -127,4 +127,4 @@ reportUnnecessaryTypeIgnoreComment = false
 reportUnusedCallResult = false
 
 [tool.uv.sources]
-amarcord-open = { path = "amarcord-open" }
+amarcord_open = { path = "amarcord-open" }

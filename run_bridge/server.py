@@ -7,6 +7,7 @@ from typing import Any
 from typing import TypeAlias
 
 import structlog
+from amarcord_open import BeamtimesApi, JsonBeamtime
 from amarcord_open.api.attributi_api import AttributiApi
 from amarcord_open.api.runs_api import RunsApi
 from amarcord_open.api_client import ApiClient
@@ -27,7 +28,6 @@ from typing_extensions import Self
 
 from run_bridge.logging_util import setup_structlog
 
-setup_structlog()
 logger = structlog.stdlib.get_logger(__name__)
 
 
@@ -302,6 +302,14 @@ class Server:
         self._api_client = api_client
         self._auth_headers = auth_headers
         self._beamtime_id_to_current_run: dict[int, RuntimeRun] = {}
+
+    async def retrieve_beamtimes(self) -> list[JsonBeamtime]:
+        api_instance = BeamtimesApi(self._api_client)
+        return (
+            await api_instance.read_beamtimes_api_beamtimes_get(
+                _headers=self._auth_headers
+            )
+        ).beamtimes
 
     async def send_schema(self, beamtime_id: int) -> None:
         api_instance = AttributiApi(self._api_client)
