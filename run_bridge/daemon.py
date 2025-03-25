@@ -1,5 +1,3 @@
-import asyncio
-
 from run_bridge.logging_util import setup_structlog
 from run_bridge.webserver import start_webserver
 

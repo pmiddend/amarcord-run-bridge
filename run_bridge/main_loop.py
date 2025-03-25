@@ -13,7 +13,7 @@ from pydantic import BaseModel
 from tango import DeviceProxy
 from tango import GreenMode
 
-from run_bridge import server
+from run_bridge import amarcord_connector
 
 logger = structlog.stdlib.get_logger(__name__)
 
@@ -33,7 +33,7 @@ class Config(BaseModel):
     tape_drive_runner_url: str
     p11_runner_url: str
     raw_file_path_template: str
-    server_config: server.Config
+    amarcord_connector_config: amarcord_connector.Config
 
 
 @dataclass(frozen=True)
@@ -131,7 +131,7 @@ async def initialize_runtime_config(c: Config) -> None | RuntimeConfig:
 
 async def main_loop(
     rc: RuntimeConfig,
-    server_instance: server.Server,
+    connector_instance: amarcord_connector.AmarcordConnector,
     api_client: ApiClient,
     auth_headers: dict[str, Any],
 ) -> None:
@@ -171,16 +171,18 @@ async def main_loop(
 
                 logger.info("still measuring, updating attributi values...")
 
-                attributo_values_to_update: list[server.RuntimeNamedAttributeValue] = [
-                    server.RuntimeNamedAttributeValue(
+                attributo_values_to_update: list[
+                    amarcord_connector.RuntimeNamedAttributeValue
+                ] = [
+                    amarcord_connector.RuntimeNamedAttributeValue(
                         attribute_name=a.attribute_name,
                         value=await a.read_value(),
                     )
                     for a in rc.tango_attributes
                 ]
 
-                await server_instance.process_command(
-                    server.CommandUpdateRun(
+                await connector_instance.process_command(
+                    amarcord_connector.CommandUpdateRun(
                         beamtime_id=beamtime_id,
                         attributo_values=attributo_values_to_update,
                     )
@@ -189,8 +191,10 @@ async def main_loop(
             case [Measuring(beamtime_id=beamtime_id), False]:
                 assert beamtime_id is not None
                 logger.info("not measuring anymore, sending stop")
-                await server_instance.process_command(
-                    server.CommandStopRun(beamtime_id=beamtime_id, stopped=None)
+                await connector_instance.process_command(
+                    amarcord_connector.CommandStopRun(
+                        beamtime_id=beamtime_id, stopped=None
+                    )
                 )
                 await asyncio.sleep(_SLEEP_DURATION_S)
                 state = Measuring(beamtime_id=beamtime_id, stop_sent=True)
@@ -218,8 +222,10 @@ async def main_loop(
                     .replace("%run-id%", str(run_id))
                 )
 
-                attributo_values: list[server.RuntimeNamedAttributeValue] = [
-                    server.RuntimeNamedAttributeValue(
+                attributo_values: list[
+                    amarcord_connector.RuntimeNamedAttributeValue
+                ] = [
+                    amarcord_connector.RuntimeNamedAttributeValue(
                         attribute_name=a.attribute_name,
                         value=await a.read_value(),
                     )
@@ -227,14 +233,16 @@ async def main_loop(
                 ]
                 logger.info(f"sending {attributo_values}")
                 state = Measuring(beamtime_id=beamtime_id, stop_sent=False)
-                await server_instance.process_command(
-                    server.CommandStartRun(
+                await connector_instance.process_command(
+                    amarcord_connector.CommandStartRun(
                         beamtime_id=beamtime_id,
                         run_id=run_id,
                         started=None,
                         attributo_values=attributo_values,
                         files=[
-                            server.RuntimeFilePath(source="raw", glob=raw_file_path)
+                            amarcord_connector.RuntimeFilePath(
+                                source="raw", glob=raw_file_path
+                            )
                         ],
                     )
                 )
@@ -265,7 +273,7 @@ async def async_main(c: Config) -> None:
     await wait_for_runner(c)
 
     config_errors = False
-    for a in c.server_config.attributi:
+    for a in c.amarcord_connector_config.attributi:
         tango_name = a.input_attribute_name
 
         found = False
@@ -284,8 +292,10 @@ async def async_main(c: Config) -> None:
     if config_errors:
         sys.exit(1)
 
-    async with await server.Server.init(c.server_config) as server_instance:
-        # server_instance = await server.Server.init(c.server_config)
+    async with await amarcord_connector.AmarcordConnector.init(
+        c.amarcord_connector_config
+    ) as connector_instance:
+        # server_instance = await amarcord_connector.Amarcord_Connector.init(c.server_config)
 
         if len(sys.argv) > 2 and sys.argv[-2] == "send-schema":
             logger.info("sending schema...")
@@ -296,7 +306,7 @@ async def async_main(c: Config) -> None:
                     "send-schema: please specify the beamtime ID as the last argument"
                 )
 
-            await server_instance.send_schema(beamtime_id)
+            await connector_instance.send_schema(beamtime_id)
             return
 
         logger.info("initing runtime config...")
@@ -306,14 +316,16 @@ async def async_main(c: Config) -> None:
             logger.error("exiting...")
             sys.exit(1)
 
-        username, password = c.server_config.get_user_name_and_password()
+        username, password = c.amarcord_connector_config.get_user_name_and_password()
 
         configuration = Configuration(
-            host=c.server_config.amarcord_url, username=username, password=password
+            host=c.amarcord_connector_config.amarcord_url,
+            username=username,
+            password=password,
         )
 
         async with ApiClient(configuration) as api_client:
             auth_headers = {"Authorization": configuration.get_basic_auth_token()}
 
             logger.info("starting main loop...")
-            await main_loop(rc, server_instance, api_client, auth_headers)
+            await main_loop(rc, connector_instance, api_client, auth_headers)
