@@ -1,14 +1,15 @@
 import asyncio
 import datetime
 import sys
+from collections import deque
 from dataclasses import dataclass
 from typing import Any
 from typing import TypeAlias
 
 import structlog
-from amarcord_open.api.beamtimes_api import BeamtimesApi
+from amarcord_open import BeamtimesApi
+from amarcord_open import Configuration
 from amarcord_open.api_client import ApiClient
-from amarcord_open.configuration import Configuration
 from pydantic import BaseModel
 from tango import DeviceProxy
 from tango import GreenMode
@@ -129,7 +130,23 @@ async def initialize_runtime_config(c: Config) -> None | RuntimeConfig:
     )
 
 
+@dataclass(frozen=True)
+class LoopMessage:
+    time: datetime.datetime
+    level: str
+    message: str
+
+    @staticmethod
+    def info(message: str) -> "LoopMessage":
+        return LoopMessage(time=datetime.datetime.now(), level="info", message=message)
+
+    @staticmethod
+    def error(message: str) -> "LoopMessage":
+        return LoopMessage(time=datetime.datetime.now(), level="error", message=message)
+
+
 async def main_loop(
+    messages: deque[LoopMessage],
     rc: RuntimeConfig,
     connector_instance: amarcord_connector.AmarcordConnector,
     api_client: ApiClient,
@@ -150,26 +167,36 @@ async def main_loop(
 
         match [state, now_measuring]:
             case [Measuring(beamtime_id=None), True]:
-                logger.info("waiting for run to end, we didn't catch its beginning...")
+                messages.append(
+                    LoopMessage.info(
+                        "waiting for run to end, we didn't catch its beginning..."
+                    )
+                )
                 await asyncio.sleep(_SLEEP_DURATION_S)
             case [Measuring(beamtime_id=None), False]:
-                logger.info("was waiting for run to end, now done...")
+                messages.append(
+                    LoopMessage.info("was waiting for run to end, now done...")
+                )
                 state = NotMeasuring()
                 await asyncio.sleep(_SLEEP_DURATION_S)
             case [Measuring(beamtime_id=beamtime_id, stop_sent=True), True]:
-                logger.info(
-                    "still measuring, but stop sent, waiting for run to finish..."
+                messages.append(
+                    LoopMessage.info(
+                        "still measuring, but stop sent, waiting for run to finish..."
+                    )
                 )
                 await asyncio.sleep(_SLEEP_DURATION_S)
             case [Measuring(beamtime_id=beamtime_id, stop_sent=True), False]:
-                logger.info("not measuring after stop...")
+                messages.append(LoopMessage.info("not measuring after stop..."))
                 state = NotMeasuring()
                 await asyncio.sleep(_SLEEP_DURATION_S)
             case [Measuring(beamtime_id=beamtime_id, stop_sent=False), True]:
                 # technically reduntant, but basedpyright doesn't get it (yet)
                 assert beamtime_id is not None
 
-                logger.info("still measuring, updating attributi values...")
+                messages.append(
+                    LoopMessage.info("still measuring, updating attributi values...")
+                )
 
                 attributo_values_to_update: list[
                     amarcord_connector.RuntimeNamedAttributeValue
@@ -190,7 +217,7 @@ async def main_loop(
                 await asyncio.sleep(_SLEEP_DURATION_S)
             case [Measuring(beamtime_id=beamtime_id), False]:
                 assert beamtime_id is not None
-                logger.info("not measuring anymore, sending stop")
+                messages.append(LoopMessage.info("not measuring anymore, sending stop"))
                 await connector_instance.process_command(
                     amarcord_connector.CommandStopRun(
                         beamtime_id=beamtime_id, stopped=None
@@ -199,10 +226,10 @@ async def main_loop(
                 await asyncio.sleep(_SLEEP_DURATION_S)
                 state = Measuring(beamtime_id=beamtime_id, stop_sent=True)
             case [NotMeasuring(), False]:
-                # logger.info("still not measuring")
+                # messages.append(LoopMessage.info("still not measuring"))
                 await asyncio.sleep(_SLEEP_DURATION_S)
             case [NotMeasuring(), True]:
-                logger.info("starting to measure")
+                messages.append(LoopMessage.info("starting to measure"))
                 beamtime_id = await rc.beamtime_id_attribute.read_value()
 
                 api_instance = BeamtimesApi(api_client)
@@ -231,7 +258,11 @@ async def main_loop(
                     )
                     for a in rc.tango_attributes
                 ]
-                logger.info(f"sending {attributo_values}")
+                messages.append(
+                    LoopMessage.info(
+                        f"sending initial attributo values for bt {beamtime_id}, run {run_id}: <pre>{attributo_values}</pre>"
+                    )
+                )
                 state = Measuring(beamtime_id=beamtime_id, stop_sent=False)
                 await connector_instance.process_command(
                     amarcord_connector.CommandStartRun(
@@ -250,12 +281,14 @@ async def main_loop(
                 logger.error(f"some state was hot handled, but which one? {state}")
 
 
-async def wait_for_runner(c: Config) -> None:
+async def wait_for_runner(messages: deque[LoopMessage], c: Config) -> None:
     counter = 0
     while True:
         counter += 1
         if counter % 100 == 0:
-            logger.info(f"still waiting for P11 device on {c.p11_runner_url}")
+            messages.append(
+                LoopMessage.info(f"still waiting for P11 device on {c.p11_runner_url}")
+            )
         try:
             dp = DeviceProxy(c.p11_runner_url, green_mode=GreenMode.Asyncio)
             # this ping method is weird as hell; declared, they way I see it, as a staticmethod, but isn't really static
@@ -263,14 +296,18 @@ async def wait_for_runner(c: Config) -> None:
             return
         except:
             if counter == 1:
-                logger.info(
-                    f"didn't get P11 device on {c.p11_runner_url}, waiting for it"
+                messages.append(
+                    LoopMessage.info(
+                        f"didn't get P11 device on {c.p11_runner_url}, waiting for it"
+                    )
                 )
             await asyncio.sleep(10)
 
 
-async def async_main(c: Config) -> None:
-    await wait_for_runner(c)
+async def async_main(messages: deque[LoopMessage], c: Config) -> None:
+    await wait_for_runner(messages, c)
+
+    messages.append(LoopMessage.info("starting loop"))
 
     config_errors = False
     for a in c.amarcord_connector_config.attributi:
@@ -285,8 +322,10 @@ async def async_main(c: Config) -> None:
             if found:
                 break
         if not found:
-            logger.error(
-                f"attributo “{a.attributo_name}” refers to input attribute “{tango_name}”, but I cannot find that"
+            messages.append(
+                LoopMessage.error(
+                    f"attributo “{a.attributo_name}” refers to input attribute “{tango_name}”, but I cannot find that"
+                )
             )
             config_errors = True
     if config_errors:
@@ -295,25 +334,11 @@ async def async_main(c: Config) -> None:
     async with await amarcord_connector.AmarcordConnector.init(
         c.amarcord_connector_config
     ) as connector_instance:
-        # server_instance = await amarcord_connector.Amarcord_Connector.init(c.server_config)
-
-        if len(sys.argv) > 2 and sys.argv[-2] == "send-schema":
-            logger.info("sending schema...")
-            try:
-                beamtime_id = int(sys.argv[-1])
-            except:
-                logger.error(
-                    "send-schema: please specify the beamtime ID as the last argument"
-                )
-
-            await connector_instance.send_schema(beamtime_id)
-            return
-
-        logger.info("initing runtime config...")
+        messages.append(LoopMessage.info("initing runtime config..."))
         rc = await initialize_runtime_config(c)
 
         if rc is None:
-            logger.error("exiting...")
+            messages.append(LoopMessage.error("exiting"))
             sys.exit(1)
 
         username, password = c.amarcord_connector_config.get_user_name_and_password()
@@ -327,5 +352,5 @@ async def async_main(c: Config) -> None:
         async with ApiClient(configuration) as api_client:
             auth_headers = {"Authorization": configuration.get_basic_auth_token()}
 
-            logger.info("starting main loop...")
-            await main_loop(rc, connector_instance, api_client, auth_headers)
+            messages.append(LoopMessage.info("starting main loop"))
+            await main_loop(messages, rc, connector_instance, api_client, auth_headers)

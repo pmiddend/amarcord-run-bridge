@@ -16,6 +16,7 @@ dependencies = [
     "structlog-overtime==1.0.1",
     "pydantic>=2.10.6",
     "amarcord_open",
+    "typed-argument-parser>=1.10.1",
 ]
 
 [project.scripts]
