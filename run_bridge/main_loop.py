@@ -145,8 +145,24 @@ class LoopMessage:
         return LoopMessage(time=datetime.datetime.now(), level="error", message=message)
 
 
+class LogBackend:
+    def __init__(self) -> None:
+        self.messages: deque[LoopMessage] = deque(maxlen=30)
+
+    def append(self, message: LoopMessage) -> None:
+        self.messages.append(message)
+        if message.level == "info":
+            logger.info(message.message)
+        elif message.level == "error":
+            logger.error(message.message)
+        elif message.level == "warning":
+            logger.warning(message.message)
+        else:
+            logger.info(message.message)
+
+
 async def main_loop(
-    messages: deque[LoopMessage],
+    messages: LogBackend,
     rc: RuntimeConfig,
     connector_instance: amarcord_connector.AmarcordConnector,
     api_client: ApiClient,
@@ -281,7 +297,7 @@ async def main_loop(
                 logger.error(f"some state was hot handled, but which one? {state}")
 
 
-async def wait_for_runner(messages: deque[LoopMessage], c: Config) -> None:
+async def wait_for_runner(messages: LogBackend, c: Config) -> None:
     counter = 0
     while True:
         counter += 1
@@ -304,7 +320,7 @@ async def wait_for_runner(messages: deque[LoopMessage], c: Config) -> None:
             await asyncio.sleep(10)
 
 
-async def async_main(messages: deque[LoopMessage], c: Config) -> None:
+async def async_main(messages: LogBackend, c: Config) -> None:
     await wait_for_runner(messages, c)
 
     messages.append(LoopMessage.info("starting loop"))

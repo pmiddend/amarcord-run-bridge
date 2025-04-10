@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
+from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from amarcord_open.models.json_attributo_value import JsonAttributoValue
 from amarcord_open.models.json_run_file import JsonRunFile
@@ -33,7 +33,8 @@ class JsonCreateOrUpdateRun(BaseModel):
     files: Optional[List[JsonRunFile]] = None
     started: Optional[StrictInt] = None
     stopped: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = ["beamtime_id", "attributi", "files", "started", "stopped"]
+    create_data_set: Optional[StrictBool] = False
+    __properties: ClassVar[List[str]] = ["beamtime_id", "attributi", "files", "started", "stopped", "create_data_set"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -104,7 +105,8 @@ class JsonCreateOrUpdateRun(BaseModel):
             "attributi": [JsonAttributoValue.from_dict(_item) for _item in obj["attributi"]] if obj.get("attributi") is not None else None,
             "files": [JsonRunFile.from_dict(_item) for _item in obj["files"]] if obj.get("files") is not None else None,
             "started": obj.get("started"),
-            "stopped": obj.get("stopped")
+            "stopped": obj.get("stopped"),
+            "create_data_set": obj.get("create_data_set") if obj.get("create_data_set") is not None else False
         })
         return _obj
 

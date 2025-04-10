@@ -19,37 +19,30 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
-from amarcord_open.models.db_job_status import DBJobStatus
-from amarcord_open.models.json_indexing_parameters import JsonIndexingParameters
 from typing import Optional, Set
 from typing_extensions import Self
 
-class JsonIndexingResult(BaseModel):
+class JsonImportFinishedIndexingJobInput(BaseModel):
     """
-    JsonIndexingResult
+    JsonImportFinishedIndexingJobInput
     """ # noqa: E501
-    id: StrictInt
-    created: StrictInt
-    started: Optional[StrictInt] = None
-    stopped: Optional[StrictInt] = None
-    parameters: JsonIndexingParameters
+    is_online: StrictBool
+    cell_description: StrictStr
+    command_line: StrictStr
+    source: StrictStr
+    run_internal_id: StrictInt
     stream_file: StrictStr
     program_version: StrictStr
-    run_internal_id: StrictInt
-    run_external_id: StrictInt
     frames: StrictInt
     hits: StrictInt
     indexed_frames: StrictInt
-    indexed_crystals: StrictInt
-    status: DBJobStatus
     detector_shift_x_mm: Optional[Union[StrictFloat, StrictInt]] = None
     detector_shift_y_mm: Optional[Union[StrictFloat, StrictInt]] = None
     geometry_file: StrictStr
     geometry_hash: StrictStr
-    generated_geometry_file: StrictStr
-    unit_cell_histograms_file_id: Optional[StrictInt] = None
-    has_error: StrictBool
-    __properties: ClassVar[List[str]] = ["id", "created", "started", "stopped", "parameters", "stream_file", "program_version", "run_internal_id", "run_external_id", "frames", "hits", "indexed_frames", "indexed_crystals", "status", "detector_shift_x_mm", "detector_shift_y_mm", "geometry_file", "geometry_hash", "generated_geometry_file", "unit_cell_histograms_file_id", "has_error"]
+    generated_geometry_file: Optional[StrictStr] = None
+    job_log: StrictStr
+    __properties: ClassVar[List[str]] = ["is_online", "cell_description", "command_line", "source", "run_internal_id", "stream_file", "program_version", "frames", "hits", "indexed_frames", "detector_shift_x_mm", "detector_shift_y_mm", "geometry_file", "geometry_hash", "generated_geometry_file", "job_log"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -69,7 +62,7 @@ class JsonIndexingResult(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of JsonIndexingResult from a JSON string"""
+        """Create an instance of JsonImportFinishedIndexingJobInput from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -90,14 +83,11 @@ class JsonIndexingResult(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of parameters
-        if self.parameters:
-            _dict['parameters'] = self.parameters.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of JsonIndexingResult from a dict"""
+        """Create an instance of JsonImportFinishedIndexingJobInput from a dict"""
         if obj is None:
             return None
 
@@ -105,27 +95,22 @@ class JsonIndexingResult(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "created": obj.get("created"),
-            "started": obj.get("started"),
-            "stopped": obj.get("stopped"),
-            "parameters": JsonIndexingParameters.from_dict(obj["parameters"]) if obj.get("parameters") is not None else None,
+            "is_online": obj.get("is_online"),
+            "cell_description": obj.get("cell_description"),
+            "command_line": obj.get("command_line"),
+            "source": obj.get("source"),
+            "run_internal_id": obj.get("run_internal_id"),
             "stream_file": obj.get("stream_file"),
             "program_version": obj.get("program_version"),
-            "run_internal_id": obj.get("run_internal_id"),
-            "run_external_id": obj.get("run_external_id"),
             "frames": obj.get("frames"),
             "hits": obj.get("hits"),
             "indexed_frames": obj.get("indexed_frames"),
-            "indexed_crystals": obj.get("indexed_crystals"),
-            "status": obj.get("status"),
             "detector_shift_x_mm": obj.get("detector_shift_x_mm"),
             "detector_shift_y_mm": obj.get("detector_shift_y_mm"),
             "geometry_file": obj.get("geometry_file"),
             "geometry_hash": obj.get("geometry_hash"),
             "generated_geometry_file": obj.get("generated_geometry_file"),
-            "unit_cell_histograms_file_id": obj.get("unit_cell_histograms_file_id"),
-            "has_error": obj.get("has_error")
+            "job_log": obj.get("job_log")
         })
         return _obj
 

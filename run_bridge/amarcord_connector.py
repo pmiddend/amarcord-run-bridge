@@ -125,10 +125,16 @@ def datetime_to_attributo_int(d: datetime.datetime) -> int:
     return int(d.replace(tzinfo=datetime.timezone.utc).timestamp() * 1000)
 
 
+class UpdateOrCreate(Enum):
+    UPDATE = "update"
+    CREATE = "create"
+
+
 def _runtime_run_to_update_request(
     log: structlog.stdlib.BoundLogger,
     beamtime_id: int,
     r: RuntimeRun,
+    mode: UpdateOrCreate,
     stopped: None | int,
 ) -> JsonCreateOrUpdateRun:
     calculated_attributi: list[JsonAttributoValue] = []
@@ -256,7 +262,9 @@ def _runtime_run_to_update_request(
                 )
     return JsonCreateOrUpdateRun(
         beamtime_id=beamtime_id,
-        files=[JsonRunFile(id=0, glob=f.glob, source=f.source) for f in r.files],
+        files=[JsonRunFile(id=0, glob=f.glob, source=f.source) for f in r.files]
+        if mode == UpdateOrCreate.CREATE
+        else [],
         attributi=calculated_attributi,
         started=r.started,
         stopped=stopped,
@@ -388,7 +396,11 @@ class AmarcordConnector:
             await api_instance.create_or_update_run_api_runs_run_external_id_post(
                 run_external_id=c.run_id,
                 json_create_or_update_run=_runtime_run_to_update_request(
-                    run_logger, c.beamtime_id, new_run, stopped=None
+                    run_logger,
+                    c.beamtime_id,
+                    new_run,
+                    UpdateOrCreate.CREATE,
+                    stopped=None,
                 ),
                 _headers=self._auth_headers,
             )
@@ -426,7 +438,7 @@ class AmarcordConnector:
             await api_instance.create_or_update_run_api_runs_run_external_id_post(
                 run_external_id=run.run_id,
                 json_create_or_update_run=_runtime_run_to_update_request(
-                    run_logger, c.beamtime_id, run, stopped=None
+                    run_logger, c.beamtime_id, run, UpdateOrCreate.UPDATE, stopped=None
                 ),
                 _headers=self._auth_headers,
             )
@@ -455,6 +467,7 @@ class AmarcordConnector:
                     run_logger,
                     c.beamtime_id,
                     run,
+                    UpdateOrCreate.UPDATE,
                     stopped=datetime_to_attributo_int(
                         c.stopped
                         if c.stopped is not None

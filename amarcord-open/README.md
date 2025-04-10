@@ -131,6 +131,7 @@ Class | Method | HTTP request | Description
 *MergingApi* | [**merge_job_started_api_merging_merge_result_id_start_post**](docs/MergingApi.md#merge_job_started_api_merging_merge_result_id_start_post) | **POST** /api/merging/{mergeResultId}/start | Merge Job Started
 *MergingApi* | [**queue_merge_job_api_merging_post**](docs/MergingApi.md#queue_merge_job_api_merging_post) | **POST** /api/merging | Queue Merge Job
 *MergingApi* | [**read_merge_jobs_api_merging_get**](docs/MergingApi.md#read_merge_jobs_api_merging_get) | **GET** /api/merging | Read Merge Jobs
+*ProcessingApi* | [**import_finished_indexing_job_api_indexing_import_post**](docs/ProcessingApi.md#import_finished_indexing_job_api_indexing_import_post) | **POST** /api/indexing/import | Import Finished Indexing Job
 *ProcessingApi* | [**indexing_job_finish_successfully_api_indexing_indexing_result_id_success_post**](docs/ProcessingApi.md#indexing_job_finish_successfully_api_indexing_indexing_result_id_success_post) | **POST** /api/indexing/{indexingResultId}/success | Indexing Job Finish Successfully
 *ProcessingApi* | [**indexing_job_finish_with_error_api_indexing_indexing_result_id_finish_with_error_post**](docs/ProcessingApi.md#indexing_job_finish_with_error_api_indexing_indexing_result_id_finish_with_error_post) | **POST** /api/indexing/{indexingResultId}/finish-with-error | Indexing Job Finish With Error
 *ProcessingApi* | [**indexing_job_get_errorlog_api_indexing_indexing_result_id_errorlog_get**](docs/ProcessingApi.md#indexing_job_get_errorlog_api_indexing_indexing_result_id_errorlog_get) | **GET** /api/indexing/{indexingResultId}/errorlog | Indexing Job Get Errorlog
@@ -235,6 +236,8 @@ Class | Method | HTTP request | Description
  - [JsonExperimentTypeAndRuns](docs/JsonExperimentTypeAndRuns.md)
  - [JsonExperimentTypeWithBeamtimeInformation](docs/JsonExperimentTypeWithBeamtimeInformation.md)
  - [JsonFileOutput](docs/JsonFileOutput.md)
+ - [JsonImportFinishedIndexingJobInput](docs/JsonImportFinishedIndexingJobInput.md)
+ - [JsonImportFinishedIndexingJobOutput](docs/JsonImportFinishedIndexingJobOutput.md)
  - [JsonIndexingFom](docs/JsonIndexingFom.md)
  - [JsonIndexingJob](docs/JsonIndexingJob.md)
  - [JsonIndexingJobUpdateOutput](docs/JsonIndexingJobUpdateOutput.md)

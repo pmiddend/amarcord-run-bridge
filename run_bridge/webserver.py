@@ -15,6 +15,7 @@ from amarcord_open import JsonBeamtime
 from run_bridge import amarcord_connector
 from run_bridge.bootstrap import BOOTSTRAP_SOURCE
 from run_bridge.main_loop import Config
+from run_bridge.main_loop import LogBackend
 from run_bridge.main_loop import LoopMessage
 from run_bridge.main_loop import async_main
 
@@ -183,6 +184,7 @@ def main_page_html(
 
 
 def write_current_config(config_save_file: Path, p: Path) -> None:
+    logger.info(f"setting {p} as current config in file {config_save_file}")
     with config_save_file.open("w", encoding="utf-8") as f:
         f.write(str(p))
 
@@ -305,7 +307,7 @@ def start_webserver(
 ) -> None:
     app = web.Application()
 
-    loop_messages = deque(maxlen=30)
+    loop_messages = LogBackend()
 
     app[_AMARCORD_LOOP_MESSAGES] = loop_messages
 

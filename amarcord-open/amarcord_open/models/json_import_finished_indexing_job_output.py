@@ -17,19 +17,17 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictInt
 from typing import Any, ClassVar, Dict, List
-from amarcord_open.models.json_event import JsonEvent
 from typing import Optional, Set
 from typing_extensions import Self
 
-class JsonReadEvents(BaseModel):
+class JsonImportFinishedIndexingJobOutput(BaseModel):
     """
-    JsonReadEvents
+    JsonImportFinishedIndexingJobOutput
     """ # noqa: E501
-    events: List[JsonEvent]
-    filter_dates: List[StrictStr]
-    __properties: ClassVar[List[str]] = ["events", "filter_dates"]
+    indexing_result_id: StrictInt
+    __properties: ClassVar[List[str]] = ["indexing_result_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +47,7 @@ class JsonReadEvents(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of JsonReadEvents from a JSON string"""
+        """Create an instance of JsonImportFinishedIndexingJobOutput from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,18 +68,11 @@ class JsonReadEvents(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in events (list)
-        _items = []
-        if self.events:
-            for _item_events in self.events:
-                if _item_events:
-                    _items.append(_item_events.to_dict())
-            _dict['events'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of JsonReadEvents from a dict"""
+        """Create an instance of JsonImportFinishedIndexingJobOutput from a dict"""
         if obj is None:
             return None
 
@@ -89,8 +80,7 @@ class JsonReadEvents(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "events": [JsonEvent.from_dict(_item) for _item in obj["events"]] if obj.get("events") is not None else None,
-            "filter_dates": obj.get("filter_dates")
+            "indexing_result_id": obj.get("indexing_result_id")
         })
         return _obj
 
