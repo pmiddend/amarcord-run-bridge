@@ -1,7 +1,6 @@
 import asyncio
 import json
 import socket
-from collections import deque
 from dataclasses import dataclass
 from functools import partial
 from pathlib import Path
@@ -16,7 +15,6 @@ from run_bridge import amarcord_connector
 from run_bridge.bootstrap import BOOTSTRAP_SOURCE
 from run_bridge.main_loop import Config
 from run_bridge.main_loop import LogBackend
-from run_bridge.main_loop import LoopMessage
 from run_bridge.main_loop import async_main
 
 logger = structlog.stdlib.get_logger(__name__)
@@ -70,7 +68,7 @@ class SelectedData:
 
 
 def main_page_html(
-    messages: deque[LoopMessage],
+    messages: LogBackend,
     config_files_dir: Path,
     config_file_paths: ErrorMessage | list[Path],
     selected_data: None | ErrorMessage | SelectedData,
@@ -82,7 +80,9 @@ def main_page_html(
         content += "<h4>Status messages</h4>"
         content += (
             "<ul><li>"
-            + "</li><li>".join(f"{m.time} [{m.level}] {m.message}" for m in messages)
+            + "</li><li>".join(
+                f"{m.time} [{m.level}] {m.message}" for m in messages.messages
+            )
             + "</li></ul>"
         )
         content += "</div>"

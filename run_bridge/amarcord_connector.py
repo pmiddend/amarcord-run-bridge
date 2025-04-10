@@ -29,6 +29,8 @@ from typing_extensions import Self
 
 logger = structlog.stdlib.get_logger(__name__)
 
+AMARCORD_REQUEST_TIMEOUT_S = 5
+
 
 class AttributoOperation(Enum):
     TAKE_FIRST = "take-first"
@@ -314,7 +316,9 @@ class AmarcordConnector:
         api_instance = BeamtimesApi(self._api_client)
         return (
             await api_instance.read_beamtimes_api_beamtimes_get(
-                _headers=self._auth_headers
+                _headers=self._auth_headers,
+                # Default timeout is 5min and there's no way to set a default
+                _request_timeout=AMARCORD_REQUEST_TIMEOUT_S,
             )
         ).beamtimes
 
@@ -325,7 +329,10 @@ class AmarcordConnector:
             a.name
             for a in (
                 await api_instance.read_attributi_api_attributi_beamtime_id_get(
-                    beamtime_id, _headers=self._auth_headers
+                    beamtime_id,
+                    _headers=self._auth_headers,
+                    # Default timeout is 5min and there's no way to set a default
+                    _request_timeout=AMARCORD_REQUEST_TIMEOUT_S,
                 )
             ).attributi
         )
@@ -350,6 +357,8 @@ class AmarcordConnector:
                     beamtime_id=beamtime_id,
                 ),
                 _headers=self._auth_headers,
+                # Default timeout is 5min and there's no way to set a default
+                _request_timeout=AMARCORD_REQUEST_TIMEOUT_S,
             )
             logger.info(f"created {create_response} new attribut(oi)")
 
@@ -371,6 +380,8 @@ class AmarcordConnector:
                 await api_instance.read_attributi_api_attributi_beamtime_id_get(
                     c.beamtime_id,
                     _headers=self._auth_headers,
+                    # Default timeout is 5min and there's no way to set a default
+                    _request_timeout=AMARCORD_REQUEST_TIMEOUT_S,
                 )
             ).attributi
         }
@@ -403,6 +414,8 @@ class AmarcordConnector:
                     stopped=None,
                 ),
                 _headers=self._auth_headers,
+                # Default timeout is 5min and there's no way to set a default
+                _request_timeout=AMARCORD_REQUEST_TIMEOUT_S,
             )
         )
 
@@ -441,6 +454,8 @@ class AmarcordConnector:
                     run_logger, c.beamtime_id, run, UpdateOrCreate.UPDATE, stopped=None
                 ),
                 _headers=self._auth_headers,
+                # Default timeout is 5min and there's no way to set a default
+                _request_timeout=AMARCORD_REQUEST_TIMEOUT_S,
             )
         )
 
@@ -475,6 +490,8 @@ class AmarcordConnector:
                     ),
                 ),
                 _headers=self._auth_headers,
+                # Default timeout is 5min and there's no way to set a default
+                _request_timeout=AMARCORD_REQUEST_TIMEOUT_S,
             )
         )
         run_logger.info(f"run stopped, response: {api_response}")

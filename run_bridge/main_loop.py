@@ -251,7 +251,10 @@ async def main_loop(
                 api_instance = BeamtimesApi(api_client)
                 beamtime_info = (
                     await api_instance.read_beamtime_api_beamtimes_beamtime_id_get_with_http_info(
-                        beamtime_id, _headers=auth_headers
+                        beamtime_id,
+                        _headers=auth_headers,
+                        # Default timeout is 5min and there's no way to set a default
+                        _request_timeout=amarcord_connector.AMARCORD_REQUEST_TIMEOUT_S,
                     )
                 ).data
 
@@ -363,10 +366,18 @@ async def async_main(messages: LogBackend, c: Config) -> None:
             host=c.amarcord_connector_config.amarcord_url,
             username=username,
             password=password,
+            # this might not do the right thing
+            # retries=0,
         )
 
         async with ApiClient(configuration) as api_client:
             auth_headers = {"Authorization": configuration.get_basic_auth_token()}
 
             messages.append(LoopMessage.info("starting main loop"))
-            await main_loop(messages, rc, connector_instance, api_client, auth_headers)
+            try:
+                await main_loop(
+                    messages, rc, connector_instance, api_client, auth_headers
+                )
+            except:
+                logger.exception("unexpected exception, bailing out")
+                sys.exit(1)
