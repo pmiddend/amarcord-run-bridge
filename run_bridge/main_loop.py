@@ -30,6 +30,7 @@ class TangoDevice(BaseModel):
 
 
 class Config(BaseModel):
+    description: str = ""
     tango_devices: list[TangoDevice]
     tape_drive_runner_url: str
     p11_runner_url: str

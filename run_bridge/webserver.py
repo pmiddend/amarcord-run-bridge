@@ -96,12 +96,20 @@ def main_page_html(
     except:
         hostname = "localhost"
 
+    config_files: list[ConfigWithPath] = []
+    for config_path in config_file_paths:
+        try:
+            with config_path.open("r", encoding="utf-8") as g:
+                config_files.append(ConfigWithPath(Config(**json.load(g)), config_path))
+        except:
+            pass
+
     if selected_data is None or isinstance(selected_data, ErrorMessage):
         if isinstance(selected_data, ErrorMessage):
             content += f'<div class="container"><div class="alert alert-danger">{selected_data.message}</div></div>'
         options = "\n".join(
-            f'<option value="{filename}">{filename.name}</option>'
-            for filename in config_file_paths
+            f'<option value="{filename.path}">{filename.config.description} ({filename.path.name})</option>'
+            for filename in config_files
         )
         content += f"""
           <div class="container">
@@ -120,8 +128,8 @@ def main_page_html(
         return html_surround(content)
 
     options = "\n".join(
-        f'<option value="{filename}" {"selected" if filename == selected_data.selected_config.path else ""}>{filename.name}</option>'
-        for filename in config_file_paths
+        f'<option value="{filename.path}" {"selected" if filename.path == selected_data.selected_config.path else ""}>{filename.config.description} ({filename.path.name})</option>'
+        for filename in config_files
     )
     content += f"""
       <div class="container">
